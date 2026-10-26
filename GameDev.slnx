@@ -5,7 +5,23 @@
     <BuildType Name="Release" />
     <Platform Name="x64" />
   </Configurations>
+  <Project Path="PixelEngine\thirdparty\googletest\GoogleTest.vcxproj" Id="A2790B43-8E31-4D90-F738-26ECE30FE880">
+    <BuildType Solution="Debug|x64" Project="Debug" />
+    <BuildType Solution="Distro|x64" Project="Distro" />
+    <BuildType Solution="Release|x64" Project="Release" />
+    <Platform Solution="Debug|x64" Project="x64" />
+    <Platform Solution="Distro|x64" Project="x64" />
+    <Platform Solution="Release|x64" Project="x64" />
+  </Project>
   <Project Path="PixelEngine\PixelEngine.vcxproj" Id="7D4C8C33-E901-0529-72F6-FEFFDEAAFB2C">
+    <BuildType Solution="Debug|x64" Project="Debug" />
+    <BuildType Solution="Distro|x64" Project="Distro" />
+    <BuildType Solution="Release|x64" Project="Release" />
+    <Platform Solution="Debug|x64" Project="x64" />
+    <Platform Solution="Distro|x64" Project="x64" />
+    <Platform Solution="Release|x64" Project="x64" />
+  </Project>
+  <Project Path="PixelEngineTests.vcxproj" Id="D007DABC-BC00-F90E-E532-DE93D18AD81A">
     <BuildType Solution="Debug|x64" Project="Debug" />
     <BuildType Solution="Distro|x64" Project="Distro" />
     <BuildType Solution="Release|x64" Project="Release" />

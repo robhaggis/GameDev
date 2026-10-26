@@ -1,3 +1,6 @@
 [submodule "PixelEngine/thirdparty/spdlog"]
 	path = PixelEngine/thirdparty/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "PixelEngine/thirdparty/googletest"]
+	path = PixelEngine/thirdparty/googletest
+	url = https://github.com/google/googletest.git
