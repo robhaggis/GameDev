@@ -4,11 +4,14 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include <stdio.h>
 #include <memory>
 #include <algorithm>
 #include <utility>
 #include <functional>
+#include <stdlib.h>
+#include <stdio.h>
+#include <cstring>
+#include <cmath>
 
 //Data Structures
 #include <string>
@@ -16,7 +19,6 @@
 #include <map>
 #include <unordered_map>
 #include <unordered_set>
-
 
 #ifdef PIXEL_PLATFORM_WINDOWS
 #include <Windows.h>

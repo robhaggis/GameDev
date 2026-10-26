@@ -25,13 +25,13 @@ namespace Pixel
 #define PIX_CORE_INFO(...)  ::Pixel::Log::GetEngineLogger()->info(__VA_ARGS__)
 #define PIX_CORE_WARN(...)  ::Pixel::Log::GetEngineLogger()->warn(__VA_ARGS__)
 #define PIX_CORE_ERROR(...) ::Pixel::Log::GetEngineLogger()->error(__VA_ARGS__)
-#define PIX_CORE_FATAL(...) ::Pixel::Log::GetEngineLogger()->fatal(__VA_ARGS__)
+#define PIX_CORE_FATAL(...) ::Pixel::Log::GetEngineLogger()->critical(__VA_ARGS__)
 
 #define PIX_TRACE(...)      ::Pixel::Log::GetAppLogger()->trace(__VA_ARGS__)
 #define PIX_INFO(...)       ::Pixel::Log::GetAppLogger()->info(__VA_ARGS__)
 #define PIX_WARN(...)       ::Pixel::Log::GetAppLogger()->warn(__VA_ARGS__)
 #define PIX_ERROR(...)      ::Pixel::Log::GetAppLogger()->error(__VA_ARGS__)
-#define PIX_FATAL(...)      ::Pixel::Log::GetAppLogger()->fatal(__VA_ARGS__)
+#define PIX_FATAL(...)      ::Pixel::Log::GetAppLogger()->critical(__VA_ARGS__)
 
 
 
