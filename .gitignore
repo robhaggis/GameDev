@@ -1,5 +1,9 @@
-.vs
-.git
-.sln
-/bin
-/bin-int
+# Directories
+.vs/
+bin/
+bin-int/
+
+# Files
+*.sln
+*.user
+*.filters
