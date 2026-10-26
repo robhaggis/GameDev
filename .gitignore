@@ -1,4 +1,5 @@
 .vs
 .git
+.sln
 /bin
 /bin-int
