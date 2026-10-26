@@ -1,3 +1,4 @@
+#include "PixelPCH.h"
 #include "Application.h"
 
 namespace Pixel
