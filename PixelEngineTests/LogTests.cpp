@@ -5,7 +5,7 @@
 
 #include <spdlog/sinks/ostream_sink.h>
 #include "Pixel/Log.h"
-namespace PixelTest
+namespace PixelEngineTest
 {
     class LogTests : public ::testing::Test
     {

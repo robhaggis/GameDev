@@ -7,6 +7,11 @@ namespace Pixel
 
 	void Log::Init()
 	{
+		if (s_EngineLogger && s_AppLogger)
+		{
+			return;
+		}
+
 		spdlog::set_pattern("%^[%T] %n: %v%$");
 		s_EngineLogger = spdlog::stdout_color_mt("PIXEL");
 		s_EngineLogger->set_level(spdlog::level::trace);

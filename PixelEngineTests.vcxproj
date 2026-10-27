@@ -159,7 +159,7 @@
     <ClCompile Include="PixelEngineTests\LogTests.cpp" />
     <ClCompile Include="PixelEngineTests\SmokeTest.cpp" />
     <ClCompile Include="PixelEngineTests\VectorTests.cpp" />
-    <ClCompile Include="PixelEngineTests\WindowTests.cpp" />
+    <ClCompile Include="WindowTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="PixelEngine\PixelEngine.vcxproj">

@@ -162,22 +162,24 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Pixel\Window\OpenGLWindow.h" />
     <ClInclude Include="src\Pixel.h" />
     <ClInclude Include="src\Pixel\Application.h" />
     <ClInclude Include="src\Pixel\Core.h" />
     <ClInclude Include="src\Pixel\EntryPoint.h" />
     <ClInclude Include="src\Pixel\Log.h" />
     <ClInclude Include="src\Pixel\Vector.h" />
-    <ClInclude Include="src\Pixel\Window.h" />
+    <ClInclude Include="src\Pixel\Window\Window.h" />
     <ClInclude Include="src\PixelPCH.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Pixel\Window\OpenGLWindow.cpp" />
     <ClCompile Include="src\Pixel\Application.cpp" />
     <ClCompile Include="src\Pixel\Log.cpp" />
-    <ClCompile Include="src\Pixel\Window.cpp" />
     <ClCompile Include="src\PixelPCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Pixel\Window\Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

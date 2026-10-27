@@ -7,9 +7,12 @@ namespace Pixel
 	{
 	public:
 		Application();
+		Application(i32 width, i32 height, const char* title);
 		virtual ~Application();
 
 		void Run();
+
+	private:
 	};
 
 	//To be defined in client app
