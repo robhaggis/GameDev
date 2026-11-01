@@ -19,6 +19,12 @@
     <ClInclude Include="src\Pixel\EntryPoint.h">
       <Filter>Pixel</Filter>
     </ClInclude>
+    <ClInclude Include="src\Pixel\Layer.h">
+      <Filter>Pixel</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pixel\LayerStack.h">
+      <Filter>Pixel</Filter>
+    </ClInclude>
     <ClInclude Include="src\Pixel\Log.h">
       <Filter>Pixel</Filter>
     </ClInclude>
@@ -35,6 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pixel\Application.cpp">
+      <Filter>Pixel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Pixel\Layer.cpp">
+      <Filter>Pixel</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Pixel\LayerStack.cpp">
       <Filter>Pixel</Filter>
     </ClCompile>
     <ClCompile Include="src\Pixel\Log.cpp">

@@ -169,6 +169,8 @@
     <ClInclude Include="src\Pixel\Application.h" />
     <ClInclude Include="src\Pixel\Core.h" />
     <ClInclude Include="src\Pixel\EntryPoint.h" />
+    <ClInclude Include="src\Pixel\Layer.h" />
+    <ClInclude Include="src\Pixel\LayerStack.h" />
     <ClInclude Include="src\Pixel\Log.h" />
     <ClInclude Include="src\Pixel\Vector.h" />
     <ClInclude Include="src\Pixel\Window\Window.h" />
@@ -177,6 +179,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pixel\Application.cpp" />
+    <ClCompile Include="src\Pixel\Layer.cpp" />
+    <ClCompile Include="src\Pixel\LayerStack.cpp" />
     <ClCompile Include="src\Pixel\Log.cpp" />
     <ClCompile Include="src\Pixel\Window\WindowsWindow.cpp" />
     <ClCompile Include="src\PixelPCH.cpp">

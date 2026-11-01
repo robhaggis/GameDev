@@ -156,6 +156,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="PixelEngineTests\LayerTests.cpp" />
     <ClCompile Include="PixelEngineTests\LogTests.cpp" />
     <ClCompile Include="PixelEngineTests\SmokeTest.cpp" />
     <ClCompile Include="PixelEngineTests\VectorTests.cpp" />

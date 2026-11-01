@@ -32,6 +32,7 @@ namespace Pixel
 
 		void update() override;
 		void processInput(InputData* input);
+		void clear() override;
 
 		static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 

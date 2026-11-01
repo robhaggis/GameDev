@@ -147,15 +147,15 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\PixelAppConfig.h" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\PixelApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PixelEngine\PixelEngine.vcxproj">
       <Project>{7D4C8C33-E901-0529-72F6-FEFFDEAAFB2C}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\PixelAppConfig.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
