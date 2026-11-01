@@ -60,21 +60,20 @@ namespace Pixel
 
 	void WindowsWindow::update()
 	{
-		if (glfwWindowShouldClose(m_GLFWWindow))
-		{
-			m_WindowShouldClose = true;
-		}
-
 		glfwSwapBuffers(m_GLFWWindow);
 		glfwPollEvents();
 	}
 
-	void WindowsWindow::processInput()
+	void WindowsWindow::processInput(InputData* data)
 	{
+		if (glfwWindowShouldClose(m_GLFWWindow))
+		{
+			data->windowShouldClose = true;
+		}
+
 		if (glfwGetKey(m_GLFWWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		{
-			glfwSetWindowShouldClose(m_GLFWWindow, true);
-			m_WindowShouldClose = true;
+			data->windowShouldClose = true;
 		}
 	}
 

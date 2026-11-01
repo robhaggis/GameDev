@@ -2,6 +2,7 @@
 #include "Pixel/Core.h"
 #include "Pixel/Log.h"
 #include "Window.h"
+#include "..\Application.h"
 
 #include "GLFW/glfw3.h"
 
@@ -30,7 +31,7 @@ namespace Pixel
 		inline const char* getTitle() const { return m_winData.m_Title; }
 
 		void update() override;
-		void processInput();
+		void processInput(InputData* input);
 
 		static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 

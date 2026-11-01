@@ -15,9 +15,9 @@ namespace Pixel
 
 	void Application::Run()
 	{
-		while (m_isRunning && ! m_Window->m_WindowShouldClose)
+		while (m_isRunning && !inputData.windowShouldClose)
 		{
-			m_Window->processInput();
+			m_Window->processInput(&inputData);
 			m_Window->update();
 		}
 		m_isRunning = false;
