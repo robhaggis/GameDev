@@ -1,18 +1,18 @@
 #pragma once
 #include "Pixel/Application.h"
 
+#include "PixelAppConfig.h"
+
 #ifdef PIXEL_PLATFORM_WINDOWS
 
-extern Pixel::Application* Pixel::CreateApplication();
+extern Pixel::Application* Pixel::CreateApplication(ui32 width, ui32 height, const char* title);
 
 int main(int argc, char** argv)
 {
 	Pixel::Log::Init();
 	PIX_CORE_INFO("Log Init Successful");
-	int a = 5;
-	PIX_TRACE("Test Message from App logger. var = {0}", a);
 
-	auto app = Pixel::CreateApplication();
+	auto app = Pixel::CreateApplication(Pixel::APP_WIDTH, Pixel::APP_HEIGHT, Pixel::APP_TITLE);
 	app->Run();
 	delete app;
 }

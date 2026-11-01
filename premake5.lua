@@ -11,6 +11,12 @@ workspace "GameDev"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+
+IncludeDir = {}
+IncludeDir["GLFW"] = "PixelEngine/thirdparty/GLFW/include"
+
+include "PixelEngine/thirdparty/GLFW"
+
 project "PixelEngine"
 	location "PixelEngine"
 	kind "SharedLib"
@@ -34,6 +40,14 @@ project "PixelEngine"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/thirdparty/spdlog/include",
+		"%{IncludeDir.GLFW}",
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib",
+		"dwmapi.lib"
 	}
 
 	filter "system:windows"
@@ -58,6 +72,7 @@ project "PixelEngine"
 		{
 			"PIXEL_DEBUG"
 		}
+		buildoptions "/MDd"
 		symbols "On"
 		optimize "Off"
 
@@ -66,6 +81,7 @@ project "PixelEngine"
 		{
 			"PIXEL_RELEASE"
 		}
+		buildoptions "/MD"
 		symbols "On"
 		optimize "On"
 
@@ -74,6 +90,7 @@ project "PixelEngine"
 		{
 			"PIXEL_DISTRO"
 		}
+		buildoptions "/MD"
 		symbols "Off"
 		optimize "On"
 

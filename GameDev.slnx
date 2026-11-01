@@ -5,6 +5,14 @@
     <BuildType Name="Release" />
     <Platform Name="x64" />
   </Configurations>
+  <Project Path="PixelEngine\thirdparty\GLFW\GLFW.vcxproj" Id="154B857C-0182-860D-AA6E-6C109684020F">
+    <BuildType Solution="Debug|x64" Project="Debug" />
+    <BuildType Solution="Distro|x64" Project="Distro" />
+    <BuildType Solution="Release|x64" Project="Release" />
+    <Platform Solution="Debug|x64" Project="x64" />
+    <Platform Solution="Distro|x64" Project="x64" />
+    <Platform Solution="Release|x64" Project="x64" />
+  </Project>
   <Project Path="PixelEngine\thirdparty\googletest\GoogleTest.vcxproj" Id="A2790B43-8E31-4D90-F738-26ECE30FE880">
     <BuildType Solution="Debug|x64" Project="Debug" />
     <BuildType Solution="Distro|x64" Project="Distro" />

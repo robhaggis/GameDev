@@ -4,6 +4,9 @@
     <Filter Include="Pixel">
       <UniqueIdentifier>{2748E20D-935C-0ABF-5CDE-AD1EC8B106F0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pixel\Window">
+      <UniqueIdentifier>{2EC314D2-1A26-A476-C3AB-DC2CAFED6FF9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pixel.h" />
@@ -23,10 +26,12 @@
       <Filter>Pixel</Filter>
     </ClInclude>
     <ClInclude Include="src\Pixel\Window\Window.h">
-      <Filter>Pixel</Filter>
+      <Filter>Pixel\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pixel\Window\WindowsWindow.h">
+      <Filter>Pixel\Window</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelPCH.h" />
-    <ClInclude Include="src\Pixel\Window\OpenGLWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pixel\Application.cpp">
@@ -35,8 +40,9 @@
     <ClCompile Include="src\Pixel\Log.cpp">
       <Filter>Pixel</Filter>
     </ClCompile>
+    <ClCompile Include="src\Pixel\Window\WindowsWindow.cpp">
+      <Filter>Pixel\Window</Filter>
+    </ClCompile>
     <ClCompile Include="src\PixelPCH.cpp" />
-    <ClCompile Include="src\Pixel\Window\OpenGLWindow.cpp" />
-    <ClCompile Include="src\Pixel\Window\Window.cpp" />
   </ItemGroup>
 </Project>
