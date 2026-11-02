@@ -83,7 +83,7 @@
       <AdditionalIncludeDirectories>src;thirdparty\spdlog\include;thirdparty\glad;thirdparty;thirdparty\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalOptions>/utf-8 /MDd %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
@@ -114,7 +114,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalOptions>/utf-8 /MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
@@ -147,7 +147,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <AdditionalOptions>/utf-8 /MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
@@ -168,14 +168,15 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Pixel\Renderer\Renderer.h" />
     <ClInclude Include="src\Pixel.h" />
     <ClInclude Include="src\Pixel\Application.h" />
     <ClInclude Include="src\Pixel\Core.h" />
     <ClInclude Include="src\Pixel\EntryPoint.h" />
+    <ClInclude Include="src\Pixel\FileIO.h" />
     <ClInclude Include="src\Pixel\Layer.h" />
     <ClInclude Include="src\Pixel\LayerStack.h" />
     <ClInclude Include="src\Pixel\Log.h" />
+    <ClInclude Include="src\Pixel\Renderer\Renderer.h" />
     <ClInclude Include="src\Pixel\Shader.h" />
     <ClInclude Include="src\Pixel\Vector.h" />
     <ClInclude Include="src\Pixel\Window\Window.h" />

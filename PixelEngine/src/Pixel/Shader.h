@@ -4,17 +4,21 @@
 #include "Log.h"
 #include "glad.h"
 #include "GLFW/glfw3.h"
+#include "FileIO.h"
 
-class PIXEL_API Shader
+namespace Pixel
 {
-public:
-	Shader(const char* vertexSource, const char* fragmentSource);
-	~Shader();
+	class PIXEL_API Shader
+	{
+	public:
+		Shader(std::string pathToVertShader, std::string pathToFragShader);
+		~Shader();
 
-	void use();
-	inline const GLuint ID() { return m_ShaderID; }
+		void use();
+		inline const GLuint ID() { return m_ShaderID; }
 
-private:
-	GLuint m_ShaderID = 0;
-};
+	private:
+		GLuint m_ShaderID = 0;
+	};
+}
 

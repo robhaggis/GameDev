@@ -1,7 +1,7 @@
 #include "LearnOpenGLLayer.h"
 
 LearnOpenGLLayer::LearnOpenGLLayer()
-    :Layer("LearnOpenGL"), m_Shader(nullptr)
+    :Layer("LearnOpenGL")
 {
 }
 
@@ -14,11 +14,15 @@ LearnOpenGLLayer::~LearnOpenGLLayer()
 
 void LearnOpenGLLayer::OnAttach()
 {
-     m_Shader = new Shader(vertexShaderSource, fragmentShaderSource);
+    m_Shader = new Pixel::Shader("../PixelSandbox/res/shaders/basicVert.glsl", "../PixelSandbox/res/shaders/basicFrag.glsl");
 }
 
 void LearnOpenGLLayer::OnUpdate()
 {
+    if (!m_Shader || m_Shader->ID() == 0) {
+        PIX_CORE_ERROR("Shader not loaded!");
+        return;
+    }
     std::vector<f32> vertices = {
         0.5f,  0.5f, 0.0f,  // top right
         0.5f, -0.5f, 0.0f,  // bottom right
@@ -37,5 +41,4 @@ void LearnOpenGLLayer::OnUpdate()
 
 void LearnOpenGLLayer::OnDetach()
 {
-    delete m_Shader;
 }

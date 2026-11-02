@@ -4,6 +4,9 @@
     <Filter Include="Pixel">
       <UniqueIdentifier>{2748E20D-935C-0ABF-5CDE-AD1EC8B106F0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pixel\Renderer">
+      <UniqueIdentifier>{ADA71AD9-9975-0EDF-8209-7F056E76EA43}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Pixel\Window">
       <UniqueIdentifier>{2EC314D2-1A26-A476-C3AB-DC2CAFED6FF9}</UniqueIdentifier>
     </Filter>
@@ -19,6 +22,9 @@
     <ClInclude Include="src\Pixel\EntryPoint.h">
       <Filter>Pixel</Filter>
     </ClInclude>
+    <ClInclude Include="src\Pixel\FileIO.h">
+      <Filter>Pixel</Filter>
+    </ClInclude>
     <ClInclude Include="src\Pixel\Layer.h">
       <Filter>Pixel</Filter>
     </ClInclude>
@@ -27,6 +33,9 @@
     </ClInclude>
     <ClInclude Include="src\Pixel\Log.h">
       <Filter>Pixel</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pixel\Renderer\Renderer.h">
+      <Filter>Pixel\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Pixel\Shader.h">
       <Filter>Pixel</Filter>
@@ -41,7 +50,6 @@
       <Filter>Pixel\Window</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelPCH.h" />
-    <ClInclude Include="src\Pixel\Renderer\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pixel\Application.cpp">
@@ -56,6 +64,9 @@
     <ClCompile Include="src\Pixel\Log.cpp">
       <Filter>Pixel</Filter>
     </ClCompile>
+    <ClCompile Include="src\Pixel\Renderer\Renderer.cpp">
+      <Filter>Pixel\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Pixel\Shader.cpp">
       <Filter>Pixel</Filter>
     </ClCompile>
@@ -63,6 +74,5 @@
       <Filter>Pixel\Window</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelPCH.cpp" />
-    <ClCompile Include="src\Pixel\Renderer\Renderer.cpp" />
   </ItemGroup>
 </Project>

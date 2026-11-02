@@ -95,7 +95,7 @@ project "PixelEngine"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
+		staticruntime "Off"
 		systemversion "latest"
 
 		defines
@@ -181,7 +181,7 @@ project "PixelSandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
+		staticruntime "Off"
 		systemversion "latest"
 
 		defines
@@ -194,6 +194,7 @@ project "PixelSandbox"
 		{
 			"PIXEL_DEBUG"
 		}
+		buildoptions "/MDd"
 		symbols "On"
 		optimize "Off"
 
