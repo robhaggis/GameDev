@@ -3,9 +3,9 @@
 #include "Pixel/Core.h"
 #include "Renderer/Renderer.h"
 #include "Pixel/AssetManager.h"
+#include "Pixel/Window/Window.h"	//For access to the input data struct
 
 
-struct InputData;
 
 namespace Pixel
 {
@@ -18,6 +18,7 @@ namespace Pixel
 		virtual void OnAttach() = 0;
 		virtual void OnDetach() = 0;
 		virtual void OnUpdate() = 0;
+		virtual void processInput(InputData* inputData) = 0;
 
 		inline const std::string& GetName() const  { return m_DebugName;}
 		inline const bool isEnabled() const { return m_IsEnabled; }

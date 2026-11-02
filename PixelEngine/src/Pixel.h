@@ -9,6 +9,7 @@
 #include "Pixel/Shader.h"
 #include "Pixel/AssetManager.h"
 #include "Pixel/Texture.h"
+#include "Pixel/Window/Window.h"
 
 
 #include "Pixel/EntryPoint.h"

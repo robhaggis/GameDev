@@ -27,6 +27,7 @@ namespace Pixel
 				if (layer->isEnabled())
 				{
 					layer->OnUpdate();
+					layer->processInput(&m_InputData);
 				}
 			}
 			m_Window->update();

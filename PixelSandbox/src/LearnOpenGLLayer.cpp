@@ -41,6 +41,7 @@ void LearnOpenGLLayer::OnUpdate()
 {
 
     m_Renderer->submit(vertices, indices);
+    m_Shader->setUniform("mixValue", m_mixValue);
     if (m_Shader != nullptr)
     {
         
@@ -55,3 +56,19 @@ void LearnOpenGLLayer::OnUpdate()
 void LearnOpenGLLayer::OnDetach()
 {
 }
+
+void LearnOpenGLLayer::processInput(Pixel::InputData* inputs)
+{
+    if (inputs->upKeyPressed)
+    {
+        m_mixValue += 0.01f;
+        if (m_mixValue > 1.0f) m_mixValue = 1.0f;
+    }
+    if (inputs->downKeyPressed)
+    {
+        m_mixValue -= 0.01f;
+        if (m_mixValue < 0.0f) m_mixValue = 0.0f;
+    }
+
+}
+

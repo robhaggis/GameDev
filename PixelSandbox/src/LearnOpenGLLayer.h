@@ -2,6 +2,7 @@
 #pragma once
 #include <Pixel/Layer.h>
 #include <Pixel/Shader.h>
+#include <Pixel/Window/Window.h>
 
 class LearnOpenGLLayer : public Pixel::Layer
 {
@@ -13,6 +14,7 @@ public:
 	void OnAttach() override;
 	void OnUpdate() override;
 	void OnDetach() override;
+	void processInput(Pixel::InputData* inputs) override;
 
 private:
 	Pixel::Shader* m_Shader;
@@ -22,5 +24,5 @@ private:
 	std::vector<f32> vertices;
 	std::vector<ui32> indices;
 
-	i32 m_mixValue;
+	f32 m_mixValue = 0.5f;
 };
