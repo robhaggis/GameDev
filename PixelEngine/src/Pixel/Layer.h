@@ -2,7 +2,10 @@
 
 #include "Pixel/Core.h"
 #include "Renderer/Renderer.h"
+#include "Pixel/AssetManager.h"
 
+
+struct InputData;
 
 namespace Pixel
 {
@@ -21,12 +24,14 @@ namespace Pixel
 		inline void enable() { m_IsEnabled = true; }
 		inline void disable() { m_IsEnabled = false; }
 
+		inline void setAssetManager(AssetManager* manager) { m_AssetManager = manager; }
 
 	
 	protected:
 		std::string m_DebugName;
 		bool m_IsEnabled;
 		Renderer* m_Renderer;
+		AssetManager* m_AssetManager;
 	};
 }
 

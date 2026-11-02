@@ -14,11 +14,13 @@ public:
 	void OnUpdate() override;
 	void OnDetach() override;
 
-	void setShader(Pixel::Shader* shader) { m_Shader = shader; }
-
 private:
 	Pixel::Shader* m_Shader;
+	Pixel::Texture* m_Texture1;
+	Pixel::Texture* m_Texture2;
+
 	std::vector<f32> vertices;
 	std::vector<ui32> indices;
 
+	i32 m_mixValue;
 };

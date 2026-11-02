@@ -6,9 +6,11 @@
 namespace Pixel
 {
 	//Struct to hold the state of all player inputs, so it can be accessed by the application class
-	struct InputData
+	struct PIXEL_API InputData
 	{
 		bool windowShouldClose = false;
+		bool upKeyPressed = false;
+		bool downKeyPressed = false;
 	};
 
 

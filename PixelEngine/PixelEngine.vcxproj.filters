@@ -51,6 +51,8 @@
     </ClInclude>
     <ClInclude Include="src\PixelPCH.h" />
     <ClInclude Include="src\Pixel\AssetManager.h" />
+    <ClInclude Include="src\Pixel\stb_image.h" />
+    <ClInclude Include="src\Pixel\Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pixel\Application.cpp">
@@ -76,5 +78,7 @@
     </ClCompile>
     <ClCompile Include="src\PixelPCH.cpp" />
     <ClCompile Include="src\Pixel\AssetManager.cpp" />
+    <ClCompile Include="src\Pixel\stb_image.cpp" />
+    <ClCompile Include="src\Pixel\Texture.cpp" />
   </ItemGroup>
 </Project>

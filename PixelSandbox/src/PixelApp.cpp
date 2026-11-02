@@ -10,16 +10,15 @@ public:
 	PixelApp(ui32 width, ui32 height, const char* title)
 		:Pixel::Application(width, height, title)
 	{
-		//Add resources to asset pool
+		//Add resources to asset Manager
 		AddShader("Basic", "../PixelSandbox/res/shaders/basic.vert", "../PixelSandbox/res/shaders/basic.frag");
+		AddShader("Texture","../PixelSandbox/res/shaders/texture.vert", "../PixelSandbox/res/shaders/texture.frag");
+		AddTexture("WoodContainer", "../PixelSandbox/res/textures/container.png");
+		AddTexture("Harvey", "../PixelSandbox/res/textures/harvey.png");
 
 		//Add Layers to application
 		glLayer = new LearnOpenGLLayer();
 		PushLayer(glLayer);
-
-		//Push resources out to layers
-		glLayer->setShader(GetShader("Basic"));
-
 
 	}
 	~PixelApp()

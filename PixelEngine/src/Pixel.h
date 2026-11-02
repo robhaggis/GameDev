@@ -7,6 +7,8 @@
 #include "Pixel/Log.h"
 #include "Pixel/Layer.h"
 #include "Pixel/Shader.h"
+#include "Pixel/AssetManager.h"
+#include "Pixel/Texture.h"
 
 
 #include "Pixel/EntryPoint.h"

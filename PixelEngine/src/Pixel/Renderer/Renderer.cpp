@@ -24,25 +24,42 @@ namespace Pixel
 			glGenVertexArrays(1, &m_VAO);
 			glGenBuffers(1, &m_VBO);
 			glGenBuffers(1, &m_EBO);
-			glBindVertexArray(m_VAO);
-			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(f32), (void*)0);
-			glEnableVertexAttribArray(0);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
+			
 		}
 
+		//Buffer Vertices
+		glBindVertexArray(m_VAO);
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(f32), vertices.data(), GL_STATIC_DRAW);
+		
+		//Buffer Indices
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(ui32), indices.data(), GL_STATIC_DRAW);
 		m_IndicesCount = indices.size();
+
+		//Position Attrib
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(f32), (void*)0);
+		glEnableVertexAttribArray(0);
+
+		// Colour attribute
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(f32), (void*)(3 * sizeof(f32)));
+		glEnableVertexAttribArray(1);
+
+		// TexCoord attribute
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(f32), (void*)(6 * sizeof(f32)));
+		glEnableVertexAttribArray(2);
+
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 	}
 
-	void Renderer::flush(GLuint shaderID)
+	void Renderer::flush(Shader* shader, Texture* texture1, Texture* texture2)
 	{
-		glUseProgram(shaderID);
+		glUseProgram(shader->ID());
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture1->ID());
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, texture2->ID());
 		glBindVertexArray(m_VAO);
 		glDrawElements(GL_TRIANGLES, m_IndicesCount, GL_UNSIGNED_INT, 0);
 	}

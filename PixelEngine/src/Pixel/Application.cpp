@@ -16,9 +16,9 @@ namespace Pixel
 
 	void Application::run()
 	{
-		while (m_isRunning && !inputData.windowShouldClose)
+		while (m_isRunning && !m_InputData.windowShouldClose)
 		{
-			m_Window->processInput(&inputData);
+			m_Window->processInput(&m_InputData);
 
 			m_Window->clear();
 
@@ -36,12 +36,15 @@ namespace Pixel
 
 	void Application::PushLayer(Layer* layer)
 	{
+		layer->setAssetManager(&m_assetManager);
 		m_LayerStack.PushLayer(layer);
+		
 		layer->OnAttach();
 	}
 
 	void Application::PushOverLay(Layer * overlay)
 	{
+		overlay->setAssetManager(&m_assetManager);
 		m_LayerStack.PushLayer(overlay);
 		overlay->OnAttach();
 	}
@@ -66,5 +69,16 @@ namespace Pixel
 	Shader* Application::GetShader(std::string name)
 	{
 		return m_assetManager.getShader(name);
+	}
+	
+	void Application::AddTexture(std::string name, std::string filepath)
+	{
+		m_assetManager.addTexture(name, filepath);
+	}
+	
+	
+	Texture* Application::GetTexture(std::string name)
+	{
+		return m_assetManager.getTexture(name);
 	}
 }
