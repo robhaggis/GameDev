@@ -103,19 +103,26 @@ namespace Pixel
 				return;
 			}
 			WindowsWindow::s_glfwInitialized = true;
+
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 			
 			m_GLFWWindow = glfwCreateWindow((i32)m_winData.m_Width, (i32)m_winData.m_Height, m_winData.m_Title, NULL, NULL);
 			PIX_CORE_INFO("Window Created successfully");
 			glfwMakeContextCurrent(m_GLFWWindow);
 			glfwSetWindowUserPointer(m_GLFWWindow, &m_winData);
 
+			//Init GLAD
+			if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+			{
+				PIX_CORE_FATAL("Failed to initialise GLAD");
+				return;
+			}
 
 			//Register Callbacks
 			glfwSetFramebufferSizeCallback(m_GLFWWindow, framebuffer_size_callback);
 			
 		}
-	}
-
-
-	
+	}	
 }

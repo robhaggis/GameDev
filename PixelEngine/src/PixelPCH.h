@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <cstring>
 #include <cmath>
+#include <cstdint>
 
 //Data Structures
 #include <string>

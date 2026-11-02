@@ -28,6 +28,9 @@
     <ClInclude Include="src\Pixel\Log.h">
       <Filter>Pixel</Filter>
     </ClInclude>
+    <ClInclude Include="src\Pixel\Shader.h">
+      <Filter>Pixel</Filter>
+    </ClInclude>
     <ClInclude Include="src\Pixel\Vector.h">
       <Filter>Pixel</Filter>
     </ClInclude>
@@ -38,6 +41,7 @@
       <Filter>Pixel\Window</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelPCH.h" />
+    <ClInclude Include="src\Pixel\Renderer\Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pixel\Application.cpp">
@@ -52,9 +56,13 @@
     <ClCompile Include="src\Pixel\Log.cpp">
       <Filter>Pixel</Filter>
     </ClCompile>
+    <ClCompile Include="src\Pixel\Shader.cpp">
+      <Filter>Pixel</Filter>
+    </ClCompile>
     <ClCompile Include="src\Pixel\Window\WindowsWindow.cpp">
       <Filter>Pixel\Window</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelPCH.cpp" />
+    <ClCompile Include="src\Pixel\Renderer\Renderer.cpp" />
   </ItemGroup>
 </Project>

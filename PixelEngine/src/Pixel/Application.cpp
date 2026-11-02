@@ -23,7 +23,10 @@ namespace Pixel
 
 			for (Layer* layer : m_LayerStack)
 			{
-				layer->OnUpdate();
+				if (layer->isEnabled())
+				{
+					layer->OnUpdate();
+				}
 			}
 			m_Window->update();
 		}

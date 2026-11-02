@@ -6,6 +6,7 @@
 #include "Pixel/Application.h"
 #include "Pixel/Log.h"
 #include "Pixel/Layer.h"
+#include "Pixel/Shader.h"
 
 
 #include "Pixel/EntryPoint.h"

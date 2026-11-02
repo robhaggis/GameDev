@@ -20,6 +20,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>PixelSandbox</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>LearnOpenGL</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -79,7 +80,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>PIXEL_PLATFORM_WINDOWS;PIXEL_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\PixelEngine\thirdparty\spdlog\include;..\PixelEngine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\PixelEngine\thirdparty\spdlog\include;..\PixelEngine\src;..\PixelEngine\thirdparty\glad;..\PixelEngine\thirdparty;..\PixelEngine\thirdparty\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -99,7 +100,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>PIXEL_PLATFORM_WINDOWS;PIXEL_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\PixelEngine\thirdparty\spdlog\include;..\PixelEngine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\PixelEngine\thirdparty\spdlog\include;..\PixelEngine\src;..\PixelEngine\thirdparty\glad;..\PixelEngine\thirdparty;..\PixelEngine\thirdparty\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -125,7 +126,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>PIXEL_PLATFORM_WINDOWS;PIXEL_DISTRO;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\PixelEngine\thirdparty\spdlog\include;..\PixelEngine\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\PixelEngine\thirdparty\spdlog\include;..\PixelEngine\src;..\PixelEngine\thirdparty\glad;..\PixelEngine\thirdparty;..\PixelEngine\thirdparty\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>None</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -147,9 +148,11 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\LearnOpenGLLayer.h" />
     <ClInclude Include="src\PixelAppConfig.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\LearnOpenGLLayer.cpp" />
     <ClCompile Include="src\PixelApp.cpp" />
   </ItemGroup>
   <ItemGroup>

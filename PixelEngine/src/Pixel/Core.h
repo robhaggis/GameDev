@@ -1,5 +1,6 @@
 #pragma once
-#include <cstdint>
+#include "PixelPCH.h"
+
 
 #ifdef PIXEL_PLATFORM_WINDOWS
 	#ifdef PIXEL_BUILD_DLL

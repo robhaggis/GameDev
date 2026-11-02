@@ -14,8 +14,43 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["GLFW"] = "PixelEngine/thirdparty/GLFW/include"
+IncludeDir["Glad"] = "PixelEngine/thirdparty/glad"
+IncludeDir["KHR"] = "PixelEngine/thirdparty/"
 
-include "PixelEngine/thirdparty/GLFW"
+LibDir = {}
+LibDir["GLFW"] = "PixelEngine/thirdparty/GLFW/bin/Debug-windows-x86_64/GLFW"
+
+project "GLAD"
+	location "PixelEngine/thirdparty/glad"
+	kind "StaticLib"
+	language "C"
+	cdialect "C17"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+		"PixelEngine/thirdparty/glad/glad.c",
+	}
+
+	includedirs
+	{
+		"PixelEngine/thirdparty/glad",
+		"PixelEngine/thirdparty"
+	}
+
+	filter "system:windows"
+	systemversion "latest"
+	staticruntime "On"
+
+	filter "configurations:Debug"
+		symbols "On"
+		optimize "Off"
+
+	filter "configurations:Release"
+		symbols "On"
+		optimize "On"
 
 project "PixelEngine"
 	location "PixelEngine"
@@ -40,11 +75,19 @@ project "PixelEngine"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/thirdparty/spdlog/include",
+		"%{prj.name}/thirdparty/glad",
+		"%{IncludeDir.KHR}",
 		"%{IncludeDir.GLFW}",
+	}
+
+	libdirs
+	{
+		"%{LibDir.GLFW}"
 	}
 
 	links
 	{
+		"GLAD",
 		"GLFW",
 		"opengl32.lib",
 		"dwmapi.lib"
@@ -75,6 +118,10 @@ project "PixelEngine"
 		buildoptions "/MDd"
 		symbols "On"
 		optimize "Off"
+		libdirs
+		{
+			"PixelEngine/thirdparty/GLFW/bin/Release-windows-x86_64/GLFW"
+		}
 
 	filter "configurations:Release"
 		defines
@@ -84,6 +131,10 @@ project "PixelEngine"
 		buildoptions "/MD"
 		symbols "On"
 		optimize "On"
+		libdirs
+		{
+			"PixelEngine/thirdparty/GLFW/bin/Release-windows-x86_64/GLFW"
+		}
 
 	filter "configurations:Distro"
 		defines
@@ -93,6 +144,10 @@ project "PixelEngine"
 		buildoptions "/MD"
 		symbols "Off"
 		optimize "On"
+		libdirs
+		{
+			"PixelEngine/thirdparty/GLFW/bin/Release-windows-x86_64/GLFW"
+		}
 
 project "PixelSandbox"
 	location "PixelSandbox"
@@ -113,7 +168,10 @@ project "PixelSandbox"
 	includedirs
 	{
 		"PixelEngine/thirdparty/spdlog/include",
-		"PixelEngine/src"
+		"PixelEngine/src",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.KHR}",
+		"%{IncludeDir.GLFW}"
 	}
 
 	links

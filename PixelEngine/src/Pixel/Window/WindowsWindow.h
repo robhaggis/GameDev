@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "..\Application.h"
 
+#include "glad.h"
 #include "GLFW/glfw3.h"
 
 

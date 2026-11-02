@@ -5,7 +5,7 @@
     <BuildType Name="Release" />
     <Platform Name="x64" />
   </Configurations>
-  <Project Path="PixelEngine\thirdparty\GLFW\GLFW.vcxproj" Id="154B857C-0182-860D-AA6E-6C109684020F">
+  <Project Path="PixelEngine\thirdparty\glad\GLAD.vcxproj" Id="5D4A857C-4981-860D-F26D-6C10DE83020F">
     <BuildType Solution="Debug|x64" Project="Debug" />
     <BuildType Solution="Distro|x64" Project="Distro" />
     <BuildType Solution="Release|x64" Project="Release" />
