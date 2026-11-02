@@ -15,7 +15,7 @@ namespace Pixel
 		~Renderer();
 
 		void submit(const std::vector<f32>& vertices, const std::vector<ui32>& indices);
-		void render(GLuint shaderID);
+		void flush(GLuint shaderID);
 
 	private:
 		ui32 m_VAO, m_VBO, m_EBO;

@@ -50,6 +50,7 @@
       <Filter>Pixel\Window</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelPCH.h" />
+    <ClInclude Include="src\Pixel\AssetManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pixel\Application.cpp">
@@ -74,5 +75,6 @@
       <Filter>Pixel\Window</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelPCH.cpp" />
+    <ClCompile Include="src\Pixel\AssetManager.cpp" />
   </ItemGroup>
 </Project>

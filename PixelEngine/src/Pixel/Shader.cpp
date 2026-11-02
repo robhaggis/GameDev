@@ -54,11 +54,6 @@ namespace Pixel
         }
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
-
-        PIX_CORE_INFO("Successfully Compiled Shader - ID{0}", m_ShaderID);
-        vertStr.clear();
-        fragStr.clear();
-
     }
 
     Shader::~Shader()

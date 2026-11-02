@@ -10,12 +10,25 @@ public:
 	PixelApp(ui32 width, ui32 height, const char* title)
 		:Pixel::Application(width, height, title)
 	{
-		PushLayer(new LearnOpenGLLayer());
+		//Add resources to asset pool
+		AddShader("Basic", "../PixelSandbox/res/shaders/basic.vert", "../PixelSandbox/res/shaders/basic.frag");
+
+		//Add Layers to application
+		glLayer = new LearnOpenGLLayer();
+		PushLayer(glLayer);
+
+		//Push resources out to layers
+		glLayer->setShader(GetShader("Basic"));
+
+
 	}
 	~PixelApp()
 	{
-
+		//NOTE Be careful deleting things in here, a lot of clean up is handled by the engine, so be wary of double deletes
 	}
+
+private:
+	LearnOpenGLLayer* glLayer;
 
 };
 

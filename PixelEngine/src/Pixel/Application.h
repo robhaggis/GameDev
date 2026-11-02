@@ -3,6 +3,7 @@
 #include "Core.h"
 #include "Window/Window.h"
 #include "LayerStack.h"
+#include "AssetManager.h"
 
 
 namespace Pixel
@@ -22,11 +23,16 @@ namespace Pixel
 		void PopLayer(Layer* layer);
 		void PopOverlay(Layer* overlay);
 
+		void AddShader(std::string name, std::string vertPath, std::string fragPath);
+		Shader* GetShader(std::string name);
+
+
 	private:
 		std::unique_ptr<Window> m_Window;
 		InputData inputData;
 		bool m_isRunning = true;
-		LayerStack m_LayerStack;
+		LayerStack m_LayerStack{};
+		AssetManager m_assetManager{};
 
 	};
 

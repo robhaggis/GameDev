@@ -19,29 +19,28 @@ namespace Pixel
 
 	void Renderer::submit(const std::vector<f32>& vertices, const std::vector<ui32>& indices)
 	{
-		glGenVertexArrays(1, &m_VAO);
-		glGenBuffers(1, &m_VBO);
+		if (m_VAO == 0)
+		{
+			glGenVertexArrays(1, &m_VAO);
+			glGenBuffers(1, &m_VBO);
+			glGenBuffers(1, &m_EBO);
+			glBindVertexArray(m_VAO);
+			glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(f32), (void*)0);
+			glEnableVertexAttribArray(0);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
+		}
 
-		glGenBuffers(1, &m_EBO);
-		// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-		glBindVertexArray(m_VAO);
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(f32), vertices.data(), GL_STATIC_DRAW);
-
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(i32), indices.data(), GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(ui32), indices.data(), GL_STATIC_DRAW);
 		m_IndicesCount = indices.size();
-
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(f32), (void*)0);
-		glEnableVertexAttribArray(0);
-
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
-
 		glBindVertexArray(0);
-
 	}
 
-	void Renderer::render(GLuint shaderID)
+	void Renderer::flush(GLuint shaderID)
 	{
 		glUseProgram(shaderID);
 		glBindVertexArray(m_VAO);

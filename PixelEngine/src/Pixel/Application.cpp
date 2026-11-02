@@ -11,6 +11,7 @@ namespace Pixel
 
 	Application::~Application()
 	{
+		m_LayerStack.RemoveAllLayers();
 	}
 
 	void Application::run()
@@ -55,5 +56,15 @@ namespace Pixel
 	{
 		overlay->OnDetach();
 		m_LayerStack.PopLayer(overlay);
+	}
+
+	void Application::AddShader(std::string name, std::string vertPath, std::string fragPath)
+	{
+		m_assetManager.addShader(name, vertPath, fragPath);
+	}
+
+	Shader* Application::GetShader(std::string name)
+	{
+		return m_assetManager.getShader(name);
 	}
 }

@@ -168,6 +168,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Pixel\AssetManager.h" />
     <ClInclude Include="src\Pixel.h" />
     <ClInclude Include="src\Pixel\Application.h" />
     <ClInclude Include="src\Pixel\Core.h" />
@@ -184,6 +185,7 @@
     <ClInclude Include="src\PixelPCH.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Pixel\AssetManager.cpp" />
     <ClCompile Include="src\Pixel\Application.cpp" />
     <ClCompile Include="src\Pixel\Layer.cpp" />
     <ClCompile Include="src\Pixel\LayerStack.cpp" />
