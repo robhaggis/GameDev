@@ -25,4 +25,7 @@ private:
 	std::vector<ui32> indices;
 
 	f32 m_mixValue = 0.5f;
+
+	// Track previous frame button state for edge detection
+	bool m_PrevMouseButtonState[8] = {};
 };

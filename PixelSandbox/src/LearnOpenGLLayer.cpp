@@ -10,8 +10,6 @@ LearnOpenGLLayer::~LearnOpenGLLayer()
     delete m_Shader;
 }
 
-
-
 void LearnOpenGLLayer::OnAttach()
 {
 
@@ -69,5 +67,27 @@ void LearnOpenGLLayer::processInput(Pixel::InputData* inputs)
         m_mixValue -= 0.01f;
         if (m_mixValue < 0.0f) m_mixValue = 0.0f;
     }
+
+    // Detect press edge (transition from not pressed -> pressed)
+    if (inputs->isMouseButtonPressed[GLFW_MOUSE_BUTTON_LEFT] && !m_PrevMouseButtonState[GLFW_MOUSE_BUTTON_LEFT])
+    {
+        PIX_TRACE("LEFT Click");
+    }
+    if (inputs->isMouseButtonPressed[GLFW_MOUSE_BUTTON_RIGHT] && !m_PrevMouseButtonState[GLFW_MOUSE_BUTTON_RIGHT])
+    {
+        PIX_TRACE("Right Click");
+    }
+    if (inputs->isMouseButtonPressed[GLFW_MOUSE_BUTTON_MIDDLE] && !m_PrevMouseButtonState[GLFW_MOUSE_BUTTON_MIDDLE])
+    {
+        PIX_TRACE("Party button!");
+    }
+
+    // Update previous state for next frame
+    for (int i = 0; i < 8; i++)
+    {
+        m_PrevMouseButtonState[i] = inputs->isMouseButtonPressed[i];
+    }
+
+    //PIX_TRACE("MousePos: ({0}, {1}", inputs->mouseX, inputs->mouseY);
 }
 

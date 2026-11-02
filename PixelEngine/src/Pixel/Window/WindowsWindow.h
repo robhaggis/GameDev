@@ -38,6 +38,8 @@ namespace Pixel
 
 		static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 		static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+		static void cursor_position_callback(GLFWwindow* window, f64 xpos, f64 ypos);
+		static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 		static void window_close_callback(GLFWwindow* window);
 	
 
@@ -46,7 +48,12 @@ namespace Pixel
 		WindowData m_winData;
 
 		static bool s_glfwInitialized;
+	
+		//For passing values to the Input Data Struct
 		static bool m_Keys[512];
+		static bool m_MouseButtons[8];
+		static f64 m_CursorXPos;
+		static f64 m_CursorYPos;		
 
 		void init();
 

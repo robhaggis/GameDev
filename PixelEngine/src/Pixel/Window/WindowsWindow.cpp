@@ -6,6 +6,9 @@ namespace Pixel
 
 	bool WindowsWindow::s_glfwInitialized = false;
 	bool WindowsWindow::m_Keys[512] = {};
+	bool WindowsWindow::m_MouseButtons[8] = {};
+	f64 WindowsWindow::m_CursorXPos = 0.0;
+	f64 WindowsWindow::m_CursorYPos = 0.0;
 
 	WindowsWindow::WindowsWindow()
 	{
@@ -71,6 +74,14 @@ namespace Pixel
 		{
 			data->isKeyPressed[i] = m_Keys[i];
 		}
+
+		for (int i = 0; i < 8; i++)
+		{
+			data->isMouseButtonPressed[i] = m_MouseButtons[i];
+		}
+
+		data->mouseX = m_CursorXPos;
+		data->mouseY = m_CursorYPos;
 	}
 
 	void WindowsWindow::clear()
@@ -93,6 +104,35 @@ namespace Pixel
 		if (action == GLFW_RELEASE)
 		{
 			m_Keys[key] = false;
+		}
+	}
+
+	void WindowsWindow::cursor_position_callback(GLFWwindow* window, f64 xpos, f64 ypos)
+	{
+		m_CursorXPos = xpos;
+		m_CursorYPos = ypos;
+	}
+
+	void WindowsWindow::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+	{
+		if (action == GLFW_PRESS)
+		{
+			static f64 lastClickTime[8] = {};
+			static const f64 debounceDelay = 0.05;			//50ms debounce
+			f64 currentTime = glfwGetTime();
+			if (currentTime - lastClickTime[button] >= debounceDelay)
+			{
+				m_MouseButtons[button] = true;
+				lastClickTime[button] = currentTime;
+			}
+		}
+		else if (action == GLFW_RELEASE)
+		{
+			// Only process the release if the press was registered
+			if (m_MouseButtons[button])
+			{
+				m_MouseButtons[button] = false;
+			}
 		}
 	}
 
@@ -136,6 +176,8 @@ namespace Pixel
 			glfwSetFramebufferSizeCallback(m_GLFWWindow, framebuffer_size_callback);
 			glfwSetWindowCloseCallback(m_GLFWWindow, window_close_callback);
 			glfwSetKeyCallback(m_GLFWWindow, WindowsWindow::key_callback);
+			glfwSetCursorPosCallback(m_GLFWWindow, WindowsWindow::cursor_position_callback);
+			glfwSetMouseButtonCallback(m_GLFWWindow, WindowsWindow::mouse_button_callback);
 			
 		}
 	}	

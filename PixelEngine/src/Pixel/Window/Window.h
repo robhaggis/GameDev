@@ -9,6 +9,9 @@ namespace Pixel
 	struct PIXEL_API InputData
 	{
 		bool isKeyPressed[512]{};
+		i32 mouseX;
+		i32 mouseY;
+		bool isMouseButtonPressed[8]{};
 	};
 
 
