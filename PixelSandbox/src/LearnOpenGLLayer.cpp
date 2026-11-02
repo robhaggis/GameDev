@@ -14,15 +14,11 @@ LearnOpenGLLayer::~LearnOpenGLLayer()
 
 void LearnOpenGLLayer::OnAttach()
 {
-    m_Shader = new Pixel::Shader("../PixelSandbox/res/shaders/basicVert.glsl", "../PixelSandbox/res/shaders/basicFrag.glsl");
+    m_Shader = new Pixel::Shader("../PixelSandbox/res/shaders/basic.vert", "../PixelSandbox/res/shaders/basic.frag");
 }
 
 void LearnOpenGLLayer::OnUpdate()
 {
-    if (!m_Shader || m_Shader->ID() == 0) {
-        PIX_CORE_ERROR("Shader not loaded!");
-        return;
-    }
     std::vector<f32> vertices = {
         0.5f,  0.5f, 0.0f,  // top right
         0.5f, -0.5f, 0.0f,  // bottom right
@@ -34,6 +30,8 @@ void LearnOpenGLLayer::OnUpdate()
        0, 1, 3,  // first Triangle
        1, 2, 3   // second Triangle
     };
+
+    m_Shader->setUniform("colourIn", 1.0f);
 
     m_Renderer->submit(vertices, indices);
     m_Renderer->render(m_Shader->ID());

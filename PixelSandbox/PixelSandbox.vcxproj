@@ -160,8 +160,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\shaders\basicFrag.glsl" />
-    <None Include="res\shaders\basicVert.glsl" />
+    <None Include="res\shaders\basic.frag" />
+    <None Include="res\shaders\basic.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
