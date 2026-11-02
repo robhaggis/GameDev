@@ -59,16 +59,15 @@ void LearnOpenGLLayer::OnDetach()
 
 void LearnOpenGLLayer::processInput(Pixel::InputData* inputs)
 {
-    if (inputs->upKeyPressed)
+    if (inputs->isKeyPressed[GLFW_KEY_UP])
     {
         m_mixValue += 0.01f;
         if (m_mixValue > 1.0f) m_mixValue = 1.0f;
     }
-    if (inputs->downKeyPressed)
+    else if (inputs->isKeyPressed[GLFW_KEY_DOWN])
     {
         m_mixValue -= 0.01f;
         if (m_mixValue < 0.0f) m_mixValue = 0.0f;
     }
-
 }
 

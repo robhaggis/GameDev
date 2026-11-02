@@ -5,6 +5,7 @@ namespace Pixel
 {
 
 	bool WindowsWindow::s_glfwInitialized = false;
+	bool WindowsWindow::m_Keys[512] = {};
 
 	WindowsWindow::WindowsWindow()
 	{
@@ -66,34 +67,10 @@ namespace Pixel
 
 	void WindowsWindow::processInput(InputData* data)
 	{
-		if (glfwWindowShouldClose(m_GLFWWindow))
+		for (int i = 0; i < 512; i++)
 		{
-			data->windowShouldClose = true;
+			data->isKeyPressed[i] = m_Keys[i];
 		}
-
-		if (glfwGetKey(m_GLFWWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-		{
-			data->windowShouldClose = true;
-		}
-
-		if (glfwGetKey(m_GLFWWindow, GLFW_KEY_UP) == GLFW_PRESS)
-		{
-			data->upKeyPressed = true;
-		}
-		else
-		{
-			data->upKeyPressed = false;
-		}
-
-		if (glfwGetKey(m_GLFWWindow, GLFW_KEY_DOWN) == GLFW_PRESS)
-		{
-			data->downKeyPressed = true;
-		}
-		else
-		{
-			data->downKeyPressed = false;
-		}
-
 	}
 
 	void WindowsWindow::clear()
@@ -107,6 +84,17 @@ namespace Pixel
 		glViewport(0, 0, width, height);
 	}
 
+	void WindowsWindow::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+	{
+		if (action == GLFW_PRESS)
+		{
+			m_Keys[key] = true;
+		}
+		if (action == GLFW_RELEASE)
+		{
+			m_Keys[key] = false;
+		}
+	}
 
 	void WindowsWindow::init()
 	{
@@ -141,6 +129,7 @@ namespace Pixel
 
 			//Register Callbacks
 			glfwSetFramebufferSizeCallback(m_GLFWWindow, framebuffer_size_callback);
+			glfwSetKeyCallback(m_GLFWWindow, WindowsWindow::key_callback);
 			
 		}
 	}	

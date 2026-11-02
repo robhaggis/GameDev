@@ -36,12 +36,17 @@ namespace Pixel
 		void clear() override;
 
 		static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+		static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+		
+
+		
 
 	private:
 		GLFWwindow* m_GLFWWindow;
 		WindowData m_winData;
 
 		static bool s_glfwInitialized;
+		static bool m_Keys[512];
 
 		void init();
 
