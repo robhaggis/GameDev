@@ -24,6 +24,7 @@ namespace Pixel
 		virtual inline ui32 getHeight() = 0;
 		virtual void processInput(InputData* data) = 0;
 		virtual void clear() = 0;
+		virtual inline bool windowShouldClose() = 0;
 
 		static Window* create();
 		static Window* create(ui32 width, ui32 height, const char* title);

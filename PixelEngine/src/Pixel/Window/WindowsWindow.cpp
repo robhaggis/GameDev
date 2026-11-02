@@ -96,6 +96,11 @@ namespace Pixel
 		}
 	}
 
+	void WindowsWindow::window_close_callback(GLFWwindow* window)
+	{
+			glfwSetWindowShouldClose(window, GLFW_TRUE);
+	}
+
 	void WindowsWindow::init()
 	{
 		PIX_CORE_INFO("Creating Windows Window '{0}' ({1}, {2})...", m_winData.m_Title, m_winData.m_Width, m_winData.m_Height);
@@ -129,6 +134,7 @@ namespace Pixel
 
 			//Register Callbacks
 			glfwSetFramebufferSizeCallback(m_GLFWWindow, framebuffer_size_callback);
+			glfwSetWindowCloseCallback(m_GLFWWindow, window_close_callback);
 			glfwSetKeyCallback(m_GLFWWindow, WindowsWindow::key_callback);
 			
 		}
