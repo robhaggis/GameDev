@@ -37,9 +37,18 @@ void LearnOpenGLLayer::OnAttach()
 
 void LearnOpenGLLayer::OnUpdate()
 {
+    Pixel::Matrix<f32, 4, 4> rotation;
+    rotation.rotate(Pixel::Vec3f{ 0, 0, 1 }, TORADIANS(m_RotateAngle));
+
+    Pixel::Matrix<f32, 4, 4> scale;
+    scale.scale(Pixel::Vec3f{ 0.5f,0.5f,0.5f});
+
+    auto transform = scale * rotation;
 
     m_Renderer->submit(vertices, indices);
     m_Shader->setUniform("mixValue", m_mixValue);
+    m_Shader->setUniform("transform", transform.data());
+
     if (m_Shader != nullptr)
     {
         
@@ -66,6 +75,15 @@ void LearnOpenGLLayer::processInput(Pixel::InputData* inputs)
     {
         m_mixValue -= 0.01f;
         if (m_mixValue < 0.0f) m_mixValue = 0.0f;
+    }
+    else if (inputs->isKeyPressed[GLFW_KEY_LEFT])
+    {
+        m_RotateAngle -= 1.0f;
+       
+    }
+    else if (inputs->isKeyPressed[GLFW_KEY_RIGHT])
+    {
+        m_RotateAngle += 1.0f;
     }
 
     // Detect press edge (transition from not pressed -> pressed)

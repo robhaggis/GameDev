@@ -1,5 +1,7 @@
 #include "PixelPCH.h"
 #include "Application.h"
+#include "Vector.h"
+#include "Matrix.h"
 
 namespace Pixel
 {

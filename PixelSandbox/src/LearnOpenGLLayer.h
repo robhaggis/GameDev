@@ -3,6 +3,8 @@
 #include <Pixel/Layer.h>
 #include <Pixel/Shader.h>
 #include <Pixel/Window/Window.h>
+#include "Pixel/Matrix.h"
+#include "Pixel/Vector.h"
 
 class LearnOpenGLLayer : public Pixel::Layer
 {
@@ -25,6 +27,7 @@ private:
 	std::vector<ui32> indices;
 
 	f32 m_mixValue = 0.01f;
+	f32 m_RotateAngle = 0.0f;
 
 	// Track previous frame button state for edge detection
 	bool m_PrevMouseButtonState[8] = {};

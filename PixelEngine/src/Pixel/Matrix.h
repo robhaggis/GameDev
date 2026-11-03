@@ -5,6 +5,9 @@
 #include <type_traits>
 #include <initializer_list>
 
+#include "Core.h"
+#include <Pixel/Vector.h>
+
 /*
 
 	***REQUIRES C++17 OR GREATER***
@@ -18,6 +21,7 @@
 	- for (const float& v : m) sum += v;
 	- if (auto inv = m.inverse()) { use(*inv); }
 	- a.approxEqual(b) or a.approxEqual(b, 1e-4f)
+	- Pixel::Matrix<float, 4, 4> result = Pixel::Matrix<float, 4, 4>::identity();
 
 */
 
@@ -39,6 +43,7 @@ namespace Pixel
 		constexpr Matrix() = default;
 		constexpr Matrix(std::initializer_list<T> values)
 		{
+			assert(values.size() <= ROWS * COLS);
 			std::size_t i = 0;
 			for (const T& v : values)
 				if (i < ROWS * COLS) m_Data[i++] = v;
@@ -273,6 +278,61 @@ namespace Pixel
 				}
 			}
 			return inv;
+		}
+
+		Matrix& translate(const Vec3f& v)
+		{
+			static_assert(ROWS == 4 && COLS == 4,"translate(Vec3f) requires a 4x4 matrix");
+
+			*this = identity();
+			(*this)(0, 3) = v.x;
+			(*this)(1, 3) = v.y;
+			(*this)(2, 3) = v.z;
+			return *this;
+		}
+
+		Matrix& scale(const Vec3f& v)
+		{
+			static_assert(ROWS == 4 && COLS == 4, "scale(Vec3f) requires a 4x4 matrix");
+
+			*this = identity();
+			(*this)(0, 0) = v.x;
+			(*this)(1, 1) = v.y;
+			(*this)(2, 2) = v.z;
+			return *this;
+		}
+
+		Matrix& rotate(const Vec3f& axis, float angleInRads)
+		{
+			static_assert(ROWS == 4 && COLS == 4,
+				"rotate requires a 4x4 matrix");
+			static_assert(std::is_floating_point_v<T>,
+				"rotate requires a floating-point matrix type");
+
+			const float c = std::cos(angleInRads);
+			const float s = std::sin(angleInRads);
+			const float t = 1.0f - c;
+			const float x = axis.x;
+			const float y = axis.y;
+			const float z = axis.z;
+
+			// The Rodrigues formula requires a normalized axis.
+			axis.normalized();
+			*this = identity();
+
+			(*this)(0, 0) = c + x * x * t;
+			(*this)(0, 1) = x * y * t - z * s;
+			(*this)(0, 2) = x * z * t + y * s;
+
+			(*this)(1, 0) = y * x * t + z * s;
+			(*this)(1, 1) = c + y * y * t;
+			(*this)(1, 2) = y * z * t - x * s;
+
+			(*this)(2, 0) = z * x * t - y * s;
+			(*this)(2, 1) = z * y * t + x * s;
+			(*this)(2, 2) = c + z * z * t;
+
+			return *this;
 		}
 
 

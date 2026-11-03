@@ -36,4 +36,7 @@ typedef uint64_t ui64;
 typedef float f32;
 typedef double f64;
 
+
 constexpr f64 PI = 3.14159265358979323846;
+#define TORADIANS(deg) deg*(PI/180)
+#define TODEGREES(rad) rad*(180/PI)
