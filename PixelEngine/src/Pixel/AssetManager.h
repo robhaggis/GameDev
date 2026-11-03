@@ -13,6 +13,7 @@ namespace Pixel
 	public:
 		AssetManager();
 		~AssetManager();
+		void Init();
 
 		void addShader(std::string name, std::string vertPath, std::string fragPath);
 		Shader* getShader(std::string name);

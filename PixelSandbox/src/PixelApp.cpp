@@ -10,7 +10,10 @@ public:
 	PixelApp(ui32 width, ui32 height, const char* title)
 		:Pixel::Application(width, height, title)
 	{
+
 		//Add resources to asset Manager
+
+		//TODO Can we just provide application with a directory, and it automatically just loads all the shaders/texture etc
 		AddShader("Basic", "../PixelSandbox/res/shaders/basic.vert", "../PixelSandbox/res/shaders/basic.frag");
 		AddShader("Texture","../PixelSandbox/res/shaders/texture.vert", "../PixelSandbox/res/shaders/texture.frag");
 		AddTexture("WoodContainer", "../PixelSandbox/res/textures/container.png");

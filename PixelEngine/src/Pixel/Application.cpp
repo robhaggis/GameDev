@@ -7,6 +7,7 @@ namespace Pixel
 		:m_Window(nullptr)
 	{
 		m_Window = std::unique_ptr<Window>(Window::create(width, height, title));
+		m_assetManager.Init();
 	}
 
 	Application::~Application()

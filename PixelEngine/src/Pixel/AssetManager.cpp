@@ -46,14 +46,22 @@ namespace Pixel
 		}
 		else
 		{
-			PIX_CORE_WARN("Could not find shader with name {0}. Skipping...", name);
-			return nullptr; //TODO - Add a default shader to the shader pool which we can return by default
+			PIX_CORE_WARN("Could not find shader with name {0}. Returning default Shader", name);
+			auto def = m_ShaderPool->find("defaultShader");
+			if (def != m_ShaderPool->end())
+			{
+				return def->second;
+			}
+			else
+			{
+				PIX_CORE_FATAL("Default Shader Not Found");
+			}
 		}
 	}
 	void AssetManager::deleteShader(std::string name)
 	{
 		auto it = m_ShaderPool->find(name);
-		if (it != m_ShaderPool->end())
+		if (it == m_ShaderPool->end())
 		{
 			delete it->second;
 			m_ShaderPool->erase(it);
@@ -96,8 +104,16 @@ namespace Pixel
 		}
 		else
 		{
-			PIX_CORE_WARN("Could not find texture with name {0}. Skipping...", name);
-			return nullptr; //TODO - Add a default texture to the texture pool which we can return by default
+			PIX_CORE_WARN("Could not find texture with name {0}. Returning Default Texture", name);
+			auto def = m_TexturePool->find("defaultTexture");
+			if (def != m_TexturePool->end())
+			{
+				return def->second;
+			}
+			else
+			{
+				PIX_CORE_FATAL("Default Texture Not Found");
+			}
 		}
 	}
 	void AssetManager::deleteTexture(std::string name)
@@ -113,6 +129,13 @@ namespace Pixel
 			PIX_CORE_WARN("Could not find Texture with name {0}. No Deletion Occured", name);
 			return;
 		}
+	}
+
+	void AssetManager::Init()
+	{
+		//Add default shader and default texture, so we've always got something to return
+		addShader("defaultShader", "../PixelEngine/src/Pixel/default.vert", "../PixelEngine/src/Pixel/default.frag");
+		addTexture("defaultTexture", "../PixelEngine/src/Pixel/default.png");
 	}
 
 }
