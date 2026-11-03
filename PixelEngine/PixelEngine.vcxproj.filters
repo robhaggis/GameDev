@@ -53,6 +53,7 @@
     <ClInclude Include="src\Pixel\AssetManager.h" />
     <ClInclude Include="src\Pixel\stb_image.h" />
     <ClInclude Include="src\Pixel\Texture.h" />
+    <ClInclude Include="src\Pixel\Matrix.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pixel\Application.cpp">
