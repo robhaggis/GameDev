@@ -87,7 +87,7 @@ namespace Pixel
 	void WindowsWindow::clear()
 	{
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	void WindowsWindow::framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -173,6 +173,8 @@ namespace Pixel
 				PIX_CORE_FATAL("Failed to initialise GLAD");
 				return;
 			}
+
+			glEnable(GL_DEPTH_TEST);
 
 			//Register Callbacks
 			glfwSetFramebufferSizeCallback(m_GLFWWindow, framebuffer_size_callback);

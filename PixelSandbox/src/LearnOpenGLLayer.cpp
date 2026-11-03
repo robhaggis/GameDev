@@ -17,12 +17,56 @@ void LearnOpenGLLayer::OnAttach()
     m_Texture1 = m_AssetManager->getTexture("WoodContainer");
     m_Texture2 = m_AssetManager->getTexture("Harvey");
 
-    vertices = {
-        // positions          // colors           // texture coords
-         0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
-         0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
-        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
+    //vertices = {
+    //    // positions         // texture coords
+    //     0.5f,  0.5f, 0.0f,  1.0f, 1.0f,   // top right
+    //     0.5f, -0.5f, 0.0f,  1.0f, 0.0f,   // bottom right
+    //    -0.5f, -0.5f, 0.0f,  0.0f, 0.0f,   // bottom left
+    //    -0.5f,  0.5f, 0.0f,  0.0f, 1.0f    // top left 
+    //};
+
+     vertices = {
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+     0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+     0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+    -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+    -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+     0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+     0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+     0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+     0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+     0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
     };
 
    indices = {  // note that we start from 0!
@@ -47,7 +91,7 @@ void LearnOpenGLLayer::OnUpdate()
 
     
     Pixel::Matrix<f32, 4, 4> model;
-    model.rotate(Pixel::Vec3f{ 1.0f, 0.0f, 0.0f }, TORADIANS(-55.0f));
+    model.rotate(Pixel::Vec3f{ 1.0f, 1.0f, 0.0f }, TORADIANS(m_RotateAngle));
 
     Pixel::Matrix<f32, 4, 4> view;
     view.translate(Pixel::Vec3f{ 0.0f,0.0f,-3.0f });
@@ -88,7 +132,8 @@ void LearnOpenGLLayer::processInput(Pixel::InputData* inputs)
         m_mixValue -= 0.01f;
         if (m_mixValue < 0.0f) m_mixValue = 0.0f;
     }
-    else if (inputs->isKeyPressed[GLFW_KEY_LEFT])
+
+    if (inputs->isKeyPressed[GLFW_KEY_LEFT])
     {
         m_RotateAngle -= 1.0f;
        
