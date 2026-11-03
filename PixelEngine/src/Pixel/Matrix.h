@@ -304,20 +304,19 @@ namespace Pixel
 
 		Matrix& rotate(const Vec3f& axis, float angleInRads)
 		{
-			static_assert(ROWS == 4 && COLS == 4,
-				"rotate requires a 4x4 matrix");
+			static_assert(ROWS == 4 && COLS == 4,"rotate requires a 4x4 matrix");
 			static_assert(std::is_floating_point_v<T>,
 				"rotate requires a floating-point matrix type");
 
 			const float c = std::cos(angleInRads);
 			const float s = std::sin(angleInRads);
 			const float t = 1.0f - c;
-			const float x = axis.x;
-			const float y = axis.y;
-			const float z = axis.z;
 
-			// The Rodrigues formula requires a normalized axis.
-			axis.normalized();
+			// Normalize the axis incase it's a non-unit-vector
+			const Vec3f normalizedAxis = axis.normalized();
+			const float x = normalizedAxis.x;
+			const float y = normalizedAxis.y;
+			const float z = normalizedAxis.z;
 			*this = identity();
 
 			(*this)(0, 0) = c + x * x * t;
@@ -331,6 +330,23 @@ namespace Pixel
 			(*this)(2, 0) = z * x * t - y * s;
 			(*this)(2, 1) = z * y * t + x * s;
 			(*this)(2, 2) = c + z * z * t;
+
+			return *this;
+		}
+
+		Matrix& perspective(const f32 fov, const f32 aspect, const f32 zNear, const f32 zFar)
+		{
+			static_assert(ROWS == 4 && COLS == 4, "rotate requires a 4x4 matrix");
+			*this = identity();
+
+			const f32 tanHalfFov = std::tan(fov * 0.5f);
+
+			(*this)(0, 0) =  1.0f / (aspect * tanHalfFov);
+			(*this)(1, 1) = 1.0f / tanHalfFov;
+			(*this)(2, 2) = -(zFar + zNear) / (zFar - zNear);
+			(*this)(2, 3) = - (2.0f * zFar * zNear) / (zFar - zNear);
+			(*this)(3, 2) = -1.0f;
+			(*this)(3, 3) = 0.0f;
 
 			return *this;
 		}

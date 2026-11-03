@@ -37,17 +37,29 @@ void LearnOpenGLLayer::OnAttach()
 
 void LearnOpenGLLayer::OnUpdate()
 {
-    Pixel::Matrix<f32, 4, 4> rotation;
-    rotation.rotate(Pixel::Vec3f{ 0, 0, 1 }, TORADIANS(m_RotateAngle));
+    //Pixel::Matrix<f32, 4, 4> rotation;
+    //rotation.rotate(Pixel::Vec3f{ 0, 0, 1 }, TORADIANS(m_RotateAngle));
 
-    Pixel::Matrix<f32, 4, 4> scale;
-    scale.scale(Pixel::Vec3f{ 0.5f,0.5f,0.5f});
+    //Pixel::Matrix<f32, 4, 4> scale;
+    //scale.scale(Pixel::Vec3f{ 0.5f,0.5f,0.5f});
 
-    auto transform = scale * rotation;
+    //auto transform = scale * rotation;
+
+    
+    Pixel::Matrix<f32, 4, 4> model;
+    model.rotate(Pixel::Vec3f{ 1.0f, 0.0f, 0.0f }, TORADIANS(-55.0f));
+
+    Pixel::Matrix<f32, 4, 4> view;
+    view.translate(Pixel::Vec3f{ 0.0f,0.0f,-3.0f });
+
+    Pixel::Matrix<f32, 4, 4> proj;
+    proj.perspective(TORADIANS(45.0f), (f32)(1920/2) / (f32)(1080/2), 0.1f, 100.0f);
 
     m_Renderer->submit(vertices, indices);
     m_Shader->setUniform("mixValue", m_mixValue);
-    m_Shader->setUniform("transform", transform.data());
+    m_Shader->setUniform("model", model.data());
+    m_Shader->setUniform("view", view.data());
+    m_Shader->setUniform("projection", proj.data());
 
     if (m_Shader != nullptr)
     {

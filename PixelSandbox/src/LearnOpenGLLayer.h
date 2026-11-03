@@ -6,6 +6,8 @@
 #include "Pixel/Matrix.h"
 #include "Pixel/Vector.h"
 
+//#include "PixelAppConfig.h"
+
 class LearnOpenGLLayer : public Pixel::Layer
 {
 public:
