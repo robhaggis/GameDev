@@ -37,7 +37,8 @@ project "GLAD"
 	includedirs
 	{
 		"PixelEngine/thirdparty/glad",
-		"PixelEngine/thirdparty"
+		"PixelEngine/thirdparty",
+		"PixelEngine/thirdparty/glm"
 	}
 
 	filter "system:windows"

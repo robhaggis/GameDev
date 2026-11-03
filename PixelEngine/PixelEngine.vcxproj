@@ -177,11 +177,9 @@
     <ClInclude Include="src\Pixel\Layer.h" />
     <ClInclude Include="src\Pixel\LayerStack.h" />
     <ClInclude Include="src\Pixel\Log.h" />
-    <ClInclude Include="src\Pixel\Matrix.h" />
     <ClInclude Include="src\Pixel\Renderer\Renderer.h" />
     <ClInclude Include="src\Pixel\Shader.h" />
     <ClInclude Include="src\Pixel\stb_image.h" />
-    <ClInclude Include="src\Pixel\Vector.h" />
     <ClInclude Include="src\Pixel\Window\Window.h" />
     <ClInclude Include="src\Pixel\Window\WindowsWindow.h" />
     <ClInclude Include="src\PixelPCH.h" />

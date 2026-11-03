@@ -3,8 +3,9 @@
 #include <Pixel/Layer.h>
 #include <Pixel/Shader.h>
 #include <Pixel/Window/Window.h>
-#include "Pixel/Matrix.h"
-#include "Pixel/Vector.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 //#include "PixelAppConfig.h"
 
