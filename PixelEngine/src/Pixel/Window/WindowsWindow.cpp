@@ -70,6 +70,12 @@ namespace Pixel
 
 	void WindowsWindow::processInput(InputData* data)
 	{
+		//Frame timing
+		float currentFrame = static_cast<float>(glfwGetTime());
+		data->deltaTime = currentFrame - data->lastFrame;
+		data->lastFrame = currentFrame;
+
+		data->deltaTime = glfwGetTime();
 		for (int i = 0; i < 512; i++)
 		{
 			data->isKeyPressed[i] = m_Keys[i];

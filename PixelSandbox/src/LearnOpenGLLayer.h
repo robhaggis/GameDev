@@ -28,9 +28,14 @@ private:
 
 	std::vector<f32> vertices;
 	std::vector<ui32> indices;
+	std::vector<glm::vec3> cubePositions;
 
 	f32 m_mixValue = 0.01f;
 	f32 m_RotateAngle = 0.0f;
+
+	glm::vec3 cameraPos;
+	glm::vec3 cameraFront;
+	glm::vec3 cameraUp;
 
 	// Track previous frame button state for edge detection
 	bool m_PrevMouseButtonState[8] = {};

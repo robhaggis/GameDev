@@ -12,6 +12,10 @@ namespace Pixel
 		i32 mouseX;
 		i32 mouseY;
 		bool isMouseButtonPressed[8]{};
+
+		//Frame timing
+		f32 deltaTime{};
+		f32 lastFrame{};
 	};
 
 
