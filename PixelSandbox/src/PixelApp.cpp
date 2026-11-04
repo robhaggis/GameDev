@@ -1,3 +1,4 @@
+#include "Pixel/EntryPoint.h"
 #include <Pixel.h>
 
 #include "LearnOpenGLLayer.h"

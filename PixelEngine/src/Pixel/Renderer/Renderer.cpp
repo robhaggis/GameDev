@@ -37,6 +37,7 @@ namespace Pixel
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(ui32), indices.data(), GL_STATIC_DRAW);
 		m_IndicesCount = indices.size();
 
+		//TODO Determine these vertex strides and indices etc at run time not hard coded like this
 		//Position Attrib
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(f32), (void*)0);
 		glEnableVertexAttribArray(0);

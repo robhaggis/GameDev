@@ -5,8 +5,6 @@
 #include "Pixel/AssetManager.h"
 #include "Pixel/Window/Window.h"	//For access to the input data struct
 
-
-
 namespace Pixel
 {
 	class PIXEL_API Layer

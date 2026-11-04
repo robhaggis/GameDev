@@ -17,4 +17,3 @@
 #include <glm/gtc/type_ptr.hpp>
 
 
-#include "Pixel/EntryPoint.h"
