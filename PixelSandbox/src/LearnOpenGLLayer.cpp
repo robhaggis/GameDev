@@ -87,13 +87,9 @@ void LearnOpenGLLayer::OnAttach()
    m_Shader->setUniform("texture1", 0);
    m_Shader->setUniform("texture2", 1);
 
-   cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-   cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
-   cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-
-   glm::mat4 projection = glm::perspective(glm::radians(45.0f), 960.0f / 540.0f, 0.1f, 100.0f);
+   
    m_Shader->use();
-   m_Shader->setUniform("projection", projection);
+   
 }
 
 void LearnOpenGLLayer::OnUpdate()
@@ -102,12 +98,14 @@ void LearnOpenGLLayer::OnUpdate()
     m_Renderer->submit(vertices, indices);
 
     // camera/view transformation
-    glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+    glm::mat4 view = glm::lookAt(m_CamPos, m_CamPos + m_CamFront, m_CamUp);
     m_Shader->setUniform("view", view);
 
 
     for (unsigned int i = 0; i < 10; i++)
     {
+        glm::mat4 projection = glm::perspective(glm::radians(m_CamFOV), 960.0f / 540.0f, 0.1f, 100.0f);
+        m_Shader->setUniform("projection", projection);
         // calculate the model matrix for each object and pass it to shader before drawing
         glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
         model = glm::translate(model, cubePositions[i]);
@@ -125,8 +123,10 @@ void LearnOpenGLLayer::OnDetach()
 {
 }
 
-void LearnOpenGLLayer::processInput(Pixel::InputData* inputs)
+void LearnOpenGLLayer::processInput(Pixel::WindowData* inputs)
 {
+
+    //keyPresses
     if (inputs->isKeyPressed[GLFW_KEY_UP])
     {
         m_mixValue += 0.01f;
@@ -148,45 +148,57 @@ void LearnOpenGLLayer::processInput(Pixel::InputData* inputs)
         m_RotateAngle += 0.010f;
     }
 
-
-    f32 cameraSpeed = static_cast<f32>(0.025f * inputs->deltaTime);
+    //Camera Walk
+    f32 cameraSpeed = static_cast<f32>(m_CamWalkSpeeed * inputs->deltaTime);
     if (inputs->isKeyPressed[GLFW_KEY_W])
     {
-        cameraPos += cameraSpeed * cameraFront;
+        m_CamPos += cameraSpeed * m_CamFront;
     }
     if (inputs->isKeyPressed[GLFW_KEY_S])
     {
-        cameraPos -= cameraSpeed * cameraFront;
+        m_CamPos -= cameraSpeed * m_CamFront;
     }
     if (inputs->isKeyPressed[GLFW_KEY_A])
     {
-        cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+        m_CamPos -= glm::normalize(glm::cross(m_CamFront, m_CamUp)) * cameraSpeed;
     }
     if (inputs->isKeyPressed[GLFW_KEY_D])
     {
-        cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+        m_CamPos += glm::normalize(glm::cross(m_CamFront, m_CamUp)) * cameraSpeed;
     }
 
-    // Detect press edge (transition from not pressed -> pressed)
-    if (inputs->isMouseButtonPressed[GLFW_MOUSE_BUTTON_LEFT] && !m_PrevMouseButtonState[GLFW_MOUSE_BUTTON_LEFT])
+    //Mouse Clicks
+    if (inputs->isMouseButtonJustPressed[GLFW_MOUSE_BUTTON_LEFT])
     {
         PIX_TRACE("LEFT Click");
     }
-    if (inputs->isMouseButtonPressed[GLFW_MOUSE_BUTTON_RIGHT] && !m_PrevMouseButtonState[GLFW_MOUSE_BUTTON_RIGHT])
+    if (inputs->isMouseButtonJustPressed[GLFW_MOUSE_BUTTON_RIGHT])
     {
         PIX_TRACE("Right Click");
     }
-    if (inputs->isMouseButtonPressed[GLFW_MOUSE_BUTTON_MIDDLE] && !m_PrevMouseButtonState[GLFW_MOUSE_BUTTON_MIDDLE])
+    if (inputs->isMouseButtonJustPressed[GLFW_MOUSE_BUTTON_MIDDLE])
     {
         PIX_TRACE("Party button!");
     }
 
-    // Update previous state for next frame
-    for (int i = 0; i < 8; i++)
-    {
-        m_PrevMouseButtonState[i] = inputs->isMouseButtonPressed[i];
-    }
+    //Mouse Look
+    inputs->lastMouseX = inputs->mouseX;
+    inputs->lastMouseY = inputs->mouseY;
+    
+    m_CamYaw += inputs->mouseXOffset * m_MouseLookSensitivity;
+    m_CamPitch -= inputs->mouseYOffset * m_MouseLookSensitivity;
+    if (m_CamPitch > 89.0f) m_CamPitch = 89.0f;
+    if (m_CamPitch < -89.0f)m_CamPitch = -89.0f;
 
-    //PIX_TRACE("MousePos: ({0}, {1}", inputs->mouseX, inputs->mouseY);
+    glm::vec3 direction;
+    direction.x = cos(glm::radians(m_CamYaw)) * cos(glm::radians(m_CamPitch));
+    direction.y = sin(glm::radians(m_CamPitch));
+    direction.z = sin(glm::radians(m_CamYaw)) * cos(glm::radians(m_CamPitch));
+    m_CamFront = glm::normalize(direction);
+
+    //Camera Zoom
+    m_CamFOV -= (f32)inputs->mouseScrollOffset * m_MouseZoomSensitivity;
+    if (m_CamFOV < 1.0f) m_CamFOV = 1.0f;
+    if (m_CamFOV > 45.0f) m_CamFOV = 45.0f;   
 }
 

@@ -17,9 +17,14 @@ namespace Pixel
 
 	void Application::run()
 	{
-		while (m_isRunning && !m_InputData.isKeyPressed[GLFW_KEY_ESCAPE] && !m_Window->windowShouldClose())
+		while (m_isRunning && !m_Window->windowShouldClose())// && !m_InputData.isKeyPressed[GLFW_KEY_ESCAPE])
 		{
 			m_Window->processInput(&m_InputData);
+
+			if (m_InputData.isKeyJustPressed[GLFW_KEY_ESCAPE])
+			{
+				m_Window->toggleMouseCapture();
+			}
 
 			m_Window->clear();
 

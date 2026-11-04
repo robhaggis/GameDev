@@ -13,7 +13,9 @@ public:
 
 		//Add resources to asset Manager
 
-		//TODO Can we just provide application with a directory, and it automatically just loads all the shaders/texture etc
+		//TODO Can we just provide Engine with a directory, and it automatically just loads all the shaders/texture etc
+		//here we should just call App.InitResourcePool or whatever
+		
 		AddShader("Basic", "../PixelSandbox/res/shaders/basic.vert", "../PixelSandbox/res/shaders/basic.frag");
 		AddShader("Texture","../PixelSandbox/res/shaders/texture.vert", "../PixelSandbox/res/shaders/texture.frag");
 		AddTexture("WoodContainer", "../PixelSandbox/res/textures/container.png");

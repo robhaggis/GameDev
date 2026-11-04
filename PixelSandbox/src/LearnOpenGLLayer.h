@@ -15,11 +15,10 @@ public:
 	LearnOpenGLLayer();
 	~LearnOpenGLLayer();
 	
-
 	void OnAttach() override;
 	void OnUpdate() override;
 	void OnDetach() override;
-	void processInput(Pixel::InputData* inputs) override;
+	void processInput(Pixel::WindowData* inputs) override;
 
 private:
 	Pixel::Shader* m_Shader;
@@ -33,10 +32,14 @@ private:
 	f32 m_mixValue = 0.01f;
 	f32 m_RotateAngle = 0.0f;
 
-	glm::vec3 cameraPos;
-	glm::vec3 cameraFront;
-	glm::vec3 cameraUp;
+	glm::vec3 m_CamPos{ 0.0f,0.0f,10.0f};
+	glm::vec3 m_CamFront{ 0.0f,0.0f,-1.0f };
+	glm::vec3 m_CamUp{ 0.0f, 1.0f, 0.0f };
 
-	// Track previous frame button state for edge detection
-	bool m_PrevMouseButtonState[8] = {};
+	f32 m_CamYaw = -90.0f;
+	f32 m_CamPitch = 0.0f;
+	f32 m_CamFOV = 45.0f;
+	const f32 m_MouseLookSensitivity = 0.25f;
+	f32 m_CamWalkSpeeed = 5.0f;
+	const f32 m_MouseZoomSensitivity = 1.0f;
 };

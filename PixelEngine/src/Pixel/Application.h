@@ -24,7 +24,7 @@ namespace Pixel
 		void PopLayer(Layer* layer);
 		void PopOverlay(Layer* overlay);
 
-		InputData* getInput() { return &m_InputData; }
+		WindowData* getInput() { return &m_InputData; }
 
 		void AddShader(std::string name, std::string vertPath, std::string fragPath);
 		Shader* GetShader(std::string name);
@@ -35,7 +35,7 @@ namespace Pixel
 
 	private:
 		std::unique_ptr<Window> m_Window;
-		InputData m_InputData;
+		WindowData m_InputData;
 		bool m_isRunning = true;
 		LayerStack m_LayerStack{};
 		AssetManager m_assetManager{};

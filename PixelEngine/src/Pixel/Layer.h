@@ -18,7 +18,7 @@ namespace Pixel
 		virtual void OnAttach() = 0;
 		virtual void OnDetach() = 0;
 		virtual void OnUpdate() = 0;
-		virtual void processInput(InputData* inputData) = 0;
+		virtual void processInput(WindowData* inputData) = 0;
 
 		inline const std::string& GetName() const  { return m_DebugName;}
 		inline const bool isEnabled() const { return m_IsEnabled; }
