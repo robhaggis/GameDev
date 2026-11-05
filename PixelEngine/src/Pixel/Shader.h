@@ -16,7 +16,8 @@ namespace Pixel
 		Shader(std::string pathToVertShader, std::string pathToFragShader);
 		~Shader();
 
-		void use();
+		void bind();
+		void unbind();
 		inline const ui32 ID() { return m_ShaderID; }
 
 		//Uniforms
@@ -39,6 +40,8 @@ namespace Pixel
 
 	private:
 		ui32 m_ShaderID = 0;
+
+		void initTextureSlots();
 	};
 }
 

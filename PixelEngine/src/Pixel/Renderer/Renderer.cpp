@@ -23,6 +23,15 @@ namespace Pixel
 
 	void Renderer::flush()
 	{
+
+		/*
+		
+			m_VAO
+			m_TextureIDs
+			m_Shader
+
+		
+		*/
 		for (Model* model : m_RenderQueue)
 		{
 			//Bind to model shader
@@ -31,12 +40,9 @@ namespace Pixel
 			//Set Textures
 			for (i32 i = 0; i < model->m_Textures.size(); i++)
 			{
-				PIX_CORE_ASSERT(i < 15, "Too many textures, MAX 16");
+				PIX_CORE_ASSERT(i < 16, "Too many textures, MAX 16");
 				glActiveTexture(GL_TEXTURE0 + i);
 				glBindTexture(GL_TEXTURE_2D, model->m_Textures.at(i)->ID());
-
-				std::string uniformString = "texture" + std::to_string(i);
-				model->m_Shader->setUniform(uniformString, i);
 			}
 
 			//Bind to Vertex Array

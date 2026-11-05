@@ -1,0 +1,79 @@
+[1mdiff --git a/PixelEngine/src/Pixel/Renderer/Renderer.cpp b/PixelEngine/src/Pixel/Renderer/Renderer.cpp[m
+[1mindex c10ff27..c91ec61 100644[m
+[1m--- a/PixelEngine/src/Pixel/Renderer/Renderer.cpp[m
+[1m+++ b/PixelEngine/src/Pixel/Renderer/Renderer.cpp[m
+[36m@@ -23,6 +23,15 @@[m [mnamespace Pixel[m
+ [m
+ 	void Renderer::flush()[m
+ 	{[m
+[32m+[m
+[32m+[m		[32m/*[m
+[32m+[m[41m		[m
+[32m+[m			[32mm_VAO[m
+[32m+[m			[32mm_TextureIDs[m
+[32m+[m			[32mm_Shader[m
+[32m+[m
+[32m+[m[41m		[m
+[32m+[m		[32m*/[m
+ 		for (Model* model : m_RenderQueue)[m
+ 		{[m
+ 			//Bind to model shader[m
+[36m@@ -34,9 +43,6 @@[m [mnamespace Pixel[m
+ 				PIX_CORE_ASSERT(i < 15, "Too many textures, MAX 16");[m
+ 				glActiveTexture(GL_TEXTURE0 + i);[m
+ 				glBindTexture(GL_TEXTURE_2D, model->m_Textures.at(i)->ID());[m
+[31m-[m
+[31m-				std::string uniformString = "texture" + std::to_string(i);[m
+[31m-				model->m_Shader->setUniform(uniformString, i);[m
+ 			}[m
+ [m
+ 			//Bind to Vertex Array[m
+[1mdiff --git a/PixelEngine/src/Pixel/Shader.cpp b/PixelEngine/src/Pixel/Shader.cpp[m
+[1mindex f73d25a..8ecc037 100644[m
+[1m--- a/PixelEngine/src/Pixel/Shader.cpp[m
+[1m+++ b/PixelEngine/src/Pixel/Shader.cpp[m
+[36m@@ -54,6 +54,8 @@[m [mnamespace Pixel[m
+         }[m
+         glDeleteShader(vertexShader);[m
+         glDeleteShader(fragmentShader);[m
+[32m+[m
+[32m+[m[32m        initTextureSlots();[m
+     }[m
+ [m
+     Shader::~Shader()[m
+[36m@@ -65,4 +67,15 @@[m [mnamespace Pixel[m
+         glUseProgram(m_ShaderID);[m
+     }[m
+ [m
+[32m+[m[32m    void Shader::initTextureSlots()[m
+[32m+[m[32m    {[m
+[32m+[m[32m        //Assume we are always going to have 16 texture slots, as thats minimum standard mandated by OpenGL[m
+[32m+[m[32m#define MAX_TEXTURE_SLOTS 16[m
+[32m+[m
+[32m+[m[32m        for (i32 i = 0; i < MAX_TEXTURE_SLOTS; i++)[m
+[32m+[m[32m        {[m
+[32m+[m[32m            std::string uniformString = "texture" + std::to_string(i);[m
+[32m+[m[32m            setUniform(uniformString, i);[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/PixelEngine/src/Pixel/Shader.h b/PixelEngine/src/Pixel/Shader.h[m
+[1mindex c20d88b..40b4053 100644[m
+[1m--- a/PixelEngine/src/Pixel/Shader.h[m
+[1m+++ b/PixelEngine/src/Pixel/Shader.h[m
+[36m@@ -39,6 +39,8 @@[m [mnamespace Pixel[m
+ [m
+ 	private:[m
+ 		ui32 m_ShaderID = 0;[m
+[32m+[m
+[32m+[m		[32mvoid initTextureSlots();[m
+ 	};[m
+ }[m
+ [m
+[1mdiff --git a/PixelEngine/thirdparty/GLFW b/PixelEngine/thirdparty/GLFW[m
+[1m--- a/PixelEngine/thirdparty/GLFW[m
+[1m+++ b/PixelEngine/thirdparty/GLFW[m
+[36m@@ -1 +1 @@[m
+[31m-Subproject commit 026a148d7dd78d597de380c4e77ca0869f0ceaab[m
+[32m+[m[32mSubproject commit 026a148d7dd78d597de380c4e77ca0869f0ceaab-dirty[m

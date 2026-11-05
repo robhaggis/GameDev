@@ -54,15 +54,35 @@ namespace Pixel
         }
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
+
+        initTextureSlots();
     }
 
     Shader::~Shader()
     {}
 
 
-    void Shader::use()
+    void Shader::bind()
     {
         glUseProgram(m_ShaderID);
     }
 
+    void Shader::unbind()
+    {
+        glUseProgram(0);
+    }
+
+    void Shader::initTextureSlots()
+    {
+        //Assume we are always going to have 16 texture slots, as thats minimum standard mandated by OpenGL
+#define MAX_TEXTURE_SLOTS 16
+
+        bind();
+        for (i32 i = 0; i < MAX_TEXTURE_SLOTS; i++)
+        {
+            std::string uniformString = "texture" + std::to_string(i);
+            setUniform(uniformString, i);
+        }
+        unbind();
+    }
 }

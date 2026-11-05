@@ -1,0 +1,79 @@
+﻿diff --git a/PixelEngine/src/Pixel/Renderer/Renderer.cpp b/PixelEngine/src/Pixel/Renderer/Renderer.cpp
+index c10ff27..c91ec61 100644
+--- a/PixelEngine/src/Pixel/Renderer/Renderer.cpp
++++ b/PixelEngine/src/Pixel/Renderer/Renderer.cpp
+@@ -23,6 +23,15 @@ namespace Pixel
+ 
+ 	void Renderer::flush()
+ 	{
++
++		/*
++		
++			m_VAO
++			m_TextureIDs
++			m_Shader
++
++		
++		*/
+ 		for (Model* model : m_RenderQueue)
+ 		{
+ 			//Bind to model shader
+@@ -34,9 +43,6 @@ namespace Pixel
+ 				PIX_CORE_ASSERT(i < 15, "Too many textures, MAX 16");
+ 				glActiveTexture(GL_TEXTURE0 + i);
+ 				glBindTexture(GL_TEXTURE_2D, model->m_Textures.at(i)->ID());
+-
+-				std::string uniformString = "texture" + std::to_string(i);
+-				model->m_Shader->setUniform(uniformString, i);
+ 			}
+ 
+ 			//Bind to Vertex Array
+diff --git a/PixelEngine/src/Pixel/Shader.cpp b/PixelEngine/src/Pixel/Shader.cpp
+index f73d25a..8ecc037 100644
+--- a/PixelEngine/src/Pixel/Shader.cpp
++++ b/PixelEngine/src/Pixel/Shader.cpp
+@@ -54,6 +54,8 @@ namespace Pixel
+         }
+         glDeleteShader(vertexShader);
+         glDeleteShader(fragmentShader);
++
++        initTextureSlots();
+     }
+ 
+     Shader::~Shader()
+@@ -65,4 +67,15 @@ namespace Pixel
+         glUseProgram(m_ShaderID);
+     }
+ 
++    void Shader::initTextureSlots()
++    {
++        //Assume we are always going to have 16 texture slots, as thats minimum standard mandated by OpenGL
++#define MAX_TEXTURE_SLOTS 16
++
++        for (i32 i = 0; i < MAX_TEXTURE_SLOTS; i++)
++        {
++            std::string uniformString = "texture" + std::to_string(i);
++            setUniform(uniformString, i);
++        }
++    }
+ }
+\ No newline at end of file
+diff --git a/PixelEngine/src/Pixel/Shader.h b/PixelEngine/src/Pixel/Shader.h
+index c20d88b..40b4053 100644
+--- a/PixelEngine/src/Pixel/Shader.h
++++ b/PixelEngine/src/Pixel/Shader.h
+@@ -39,6 +39,8 @@ namespace Pixel
+ 
+ 	private:
+ 		ui32 m_ShaderID = 0;
++
++		void initTextureSlots();
+ 	};
+ }
+ 
+diff --git a/PixelEngine/thirdparty/GLFW b/PixelEngine/thirdparty/GLFW
+--- a/PixelEngine/thirdparty/GLFW
++++ b/PixelEngine/thirdparty/GLFW
+@@ -1 +1 @@
+-Subproject commit 026a148d7dd78d597de380c4e77ca0869f0ceaab
++Subproject commit 026a148d7dd78d597de380c4e77ca0869f0ceaab-dirty
