@@ -39,6 +39,7 @@ namespace Pixel
 		bool m_isRunning = true;
 		LayerStack m_LayerStack{};
 		AssetManager m_assetManager{};
+		Renderer* m_Renderer;
 
 	};
 

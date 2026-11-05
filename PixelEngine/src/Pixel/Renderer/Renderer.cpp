@@ -23,7 +23,7 @@ namespace Pixel
 			cmd.VAO = model->m_VAO;
 			cmd.shaderID = model->m_Shader->ID();
 			cmd.transform = transform;
-			cmd.modelMatrixShaderUniformLocation = glGetUniformLocation(cmd.shaderID, "model");
+			cmd.modelLoc = glGetUniformLocation(cmd.shaderID, "model");
 
 			for (i32 i = 0; i < model->m_Textures.size(); i++)
 			{
@@ -36,14 +36,22 @@ namespace Pixel
 	}
 
 
-	void Renderer::flush()
+	void Renderer::flush(const glm::mat4& view, const glm::mat4& projection)
 	{
 		for (const RenderCommand& cmd : m_RenderQueue)
 		{
 			//Bind to model shader
 			glUseProgram(cmd.shaderID);
 
-			glUniformMatrix4fv(cmd.modelMatrixShaderUniformLocation, 1, GL_FALSE, &cmd.transform[0][0]);
+			const GLint viewLoc = glGetUniformLocation(cmd.shaderID, "view");
+			const GLint projectionLoc = glGetUniformLocation(cmd.shaderID, "projection");
+			
+			if (viewLoc >= 0) glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
+
+			if (projectionLoc >= 0) glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, &projection[0][0]);
+
+
+			if (cmd.modelLoc >= 0)glUniformMatrix4fv(cmd.modelLoc, 1, GL_FALSE, &cmd.transform[0][0]);
 
 			//Set Textures
 			for (i32 i = 0; i < cmd.textureIDs.size(); i++)

@@ -79,6 +79,7 @@ void LearnOpenGLLayer::OnAttach()
 
 void LearnOpenGLLayer::OnUpdate()
 {
+    m_WoodenCube->m_Shader->bind();
 
     //Update View Matrix - TODO move the entire camera to the engine?
     glm::mat4 view = m_Camera->GetViewMatrix();
@@ -88,6 +89,8 @@ void LearnOpenGLLayer::OnUpdate()
     glm::mat4 projection = glm::perspective(glm::radians(m_Camera->getFOV()), static_cast<f32>(Pixel::APP_WIDTH) / static_cast<f32>(Pixel::APP_HEIGHT), 0.1f, 100.0f);
     m_Shader->setUniform("projection", projection);
 
+
+    //Render Wooden Cubes
     for (unsigned int i = 0; i < 10; i++)
     {
         //Update Model Matrix for multiple wooden cubes
@@ -95,18 +98,18 @@ void LearnOpenGLLayer::OnUpdate()
         transform = glm::translate(transform, cubePositions[i]);
         transform = glm::rotate(transform, glm::radians(20.0f * i), glm::vec3(1.0f, 0.3f, 0.5f));
         m_Renderer->submit(m_WoodenCube, transform);
-        
-        
     }
 
     m_Shader->setUniform("mixValue", m_mixValue);
 
     //Send it!
-    m_Renderer->flush(); //TODO Should't this be in the engine?
+    m_Renderer->flush(view, projection); //TODO Should't this be in the engine?
 }
 
 void LearnOpenGLLayer::OnDetach()
 {
+    delete m_WoodenCube;
+    delete m_LightCube;
 }
 
 void LearnOpenGLLayer::processInput(Pixel::WindowData* inputs)

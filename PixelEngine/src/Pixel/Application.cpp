@@ -4,15 +4,20 @@
 namespace Pixel
 {
 	Application::Application(i32 width, i32 height, const char* title)
-		:m_Window(nullptr)
+		:m_Window(nullptr), m_Renderer(nullptr)
 	{
 		m_Window.reset(Window::create(width, height, title));
 		m_assetManager.Init();
+		m_Renderer = new Renderer();
 	}
 
 	Application::~Application()
 	{
 		m_LayerStack.RemoveAllLayers();
+		delete m_Renderer;
+		//delete m_assetManager;  TODO uncomment these
+		//delete m_Window;
+
 	}
 
 	void Application::run()
@@ -44,14 +49,15 @@ namespace Pixel
 	void Application::PushLayer(Layer* layer)
 	{
 		layer->setAssetManager(&m_assetManager);
+		layer->setRenderer(m_Renderer);
 		m_LayerStack.PushLayer(layer);
-		
 		layer->OnAttach();
 	}
 
 	void Application::PushOverLay(Layer * overlay)
 	{
 		overlay->setAssetManager(&m_assetManager);
+		overlay->setRenderer(m_Renderer);
 		m_LayerStack.PushLayer(overlay);
 		overlay->OnAttach();
 	}

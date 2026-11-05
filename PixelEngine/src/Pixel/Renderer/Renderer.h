@@ -16,7 +16,7 @@ namespace Pixel
 		ui32 VAO;
 		ui32 shaderID;
 		glm::mat4 transform;
-		i32 modelMatrixShaderUniformLocation;
+		i32 modelLoc;
 		std::vector<ui32> textureIDs;
 	};
 
@@ -28,7 +28,7 @@ namespace Pixel
 		~Renderer();
 
 		void submit(Model* model, glm::mat4 transform);
-		void flush();
+		void flush(const glm::mat4& view, const glm::mat4& projection);
 
 	private:
 		std::vector<RenderCommand> m_RenderQueue;

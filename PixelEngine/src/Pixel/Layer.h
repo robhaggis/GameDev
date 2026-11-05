@@ -24,12 +24,13 @@ namespace Pixel
 		inline void disable() { m_IsEnabled = false; }
 
 		inline void setAssetManager(AssetManager* manager) { m_AssetManager = manager; }
+		inline void setRenderer(Renderer* renderer) { m_Renderer = renderer; }
 
 	
 	protected:
 		std::string m_DebugName;
 		bool m_IsEnabled;
-		Renderer* m_Renderer; //TODO HUGE - EVERY LAYER HAS IT'S OWN RENDERER?!?!? Move this to the application layer asap
+		Renderer* m_Renderer;
 		AssetManager* m_AssetManager;
 	};
 }
