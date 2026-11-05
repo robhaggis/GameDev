@@ -170,7 +170,7 @@ namespace Pixel
 			m_Keys[key] = false;
 		}
 	}
-
+	
 	void WindowsWindow::cursor_position_callback(GLFWwindow* window, f64 xpos, f64 ypos)
 	{
 		m_CursorXPos = xpos;

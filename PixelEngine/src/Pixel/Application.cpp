@@ -17,7 +17,7 @@ namespace Pixel
 
 	void Application::run()
 	{
-		while (m_isRunning && !m_Window->windowShouldClose())// && !m_InputData.isKeyPressed[GLFW_KEY_ESCAPE])
+		while (m_isRunning && !m_Window->windowShouldClose())
 		{
 			m_Window->processInput(&m_InputData);
 

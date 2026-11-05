@@ -29,7 +29,7 @@ namespace Pixel
 	protected:
 		std::string m_DebugName;
 		bool m_IsEnabled;
-		Renderer* m_Renderer;
+		Renderer* m_Renderer; //TODO HUGE - EVERY LAYER HAS IT'S OWN RENDERER?!?!? Move this to the application layer asap
 		AssetManager* m_AssetManager;
 	};
 }

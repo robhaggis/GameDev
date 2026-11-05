@@ -10,6 +10,16 @@
 
 namespace Pixel
 {
+
+	struct RenderCommand
+	{
+		ui32 VAO;
+		ui32 shaderID;
+		glm::mat4 transform;
+		i32 modelMatrixShaderUniformLocation;
+		std::vector<ui32> textureIDs;
+	};
+
 	class PIXEL_API Renderer
 	{
 	public:
@@ -17,11 +27,11 @@ namespace Pixel
 		Renderer();
 		~Renderer();
 
-		void submit(Model* model);
+		void submit(Model* model, glm::mat4 transform);
 		void flush();
 
 	private:
-		std::vector<Model*> m_RenderQueue;
+		std::vector<RenderCommand> m_RenderQueue;
 	};
 }
 

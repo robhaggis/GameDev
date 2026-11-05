@@ -77,7 +77,7 @@ namespace Pixel
 		}
 		else
 		{
-			PIX_CORE_WARN("Texture limit is 16 per model, numer of textures in model '{0}' is {1}", m_Name, m_Textures.size());
+			PIX_CORE_WARN("Texture limit is 16 per model, numer of textures in model '{0}' is {1}. Texture Not Added", m_Name, m_Textures.size());
 		}
 	}
 }

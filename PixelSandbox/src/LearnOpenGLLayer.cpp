@@ -61,15 +61,7 @@ void LearnOpenGLLayer::OnAttach()
     std::vector<ui32> indices = {3,1,2,1,2,3};
 
     m_Shader = m_AssetManager->getShader("Texture");
-    //Pixel::Texture* texture1 = m_AssetManager->getTexture("WoodContainer");
-    //Pixel::Texture* texture2 = m_AssetManager->getTexture("Harvey");
-
     m_WoodenCube = new Pixel::Model(*m_AssetManager, "cube", vertices, indices, "Texture", { "WoodContainer", "Harvey" });
-
-    m_Renderer->submit(m_WoodenCube);
-
-    m_LightCube = new Pixel::Model(*m_AssetManager, "light", vertices, indices, "Basic", {"White"});
-
 
     cubePositions = {
         glm::vec3(0.0f,  0.0f,  0.0f),
@@ -88,27 +80,29 @@ void LearnOpenGLLayer::OnAttach()
 void LearnOpenGLLayer::OnUpdate()
 {
 
-    //Update View Matrix
+    //Update View Matrix - TODO move the entire camera to the engine?
     glm::mat4 view = m_Camera->GetViewMatrix();
     m_Shader->setUniform("view", view);
 
-    //Update Projection matrix
+    //Update Projection matrix - TODO only really used for zoom, so should this be moved to the engine?
     glm::mat4 projection = glm::perspective(glm::radians(m_Camera->getFOV()), static_cast<f32>(Pixel::APP_WIDTH) / static_cast<f32>(Pixel::APP_HEIGHT), 0.1f, 100.0f);
     m_Shader->setUniform("projection", projection);
 
     for (unsigned int i = 0; i < 10; i++)
     {
         //Update Model Matrix for multiple wooden cubes
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, cubePositions[i]);
-        model = glm::rotate(model, glm::radians(20.0f * i), glm::vec3(1.0f, 0.3f, 0.5f));
-        m_Shader->setUniform("model", model);
+        glm::mat4 transform = glm::mat4(1.0f);
+        transform = glm::translate(transform, cubePositions[i]);
+        transform = glm::rotate(transform, glm::radians(20.0f * i), glm::vec3(1.0f, 0.3f, 0.5f));
+        m_Renderer->submit(m_WoodenCube, transform);
         
-        //Send it!
-        m_Renderer->flush();
+        
     }
 
     m_Shader->setUniform("mixValue", m_mixValue);
+
+    //Send it!
+    m_Renderer->flush(); //TODO Should't this be in the engine?
 }
 
 void LearnOpenGLLayer::OnDetach()
