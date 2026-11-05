@@ -19,8 +19,13 @@ public:
 		
 		AddShader("Basic", "../PixelSandbox/res/shaders/basic.vert", "../PixelSandbox/res/shaders/basic.frag");
 		AddShader("Texture","../PixelSandbox/res/shaders/texture.vert", "../PixelSandbox/res/shaders/texture.frag");
+		AddShader("FlatLight", "../PixelSandbox/res/shaders/flatLight.vert", "../PixelSandbox/res/shaders/flatLight.frag");
+
+
+
 		AddTexture("WoodContainer", "../PixelSandbox/res/textures/container.png");
 		AddTexture("Harvey", "../PixelSandbox/res/textures/harvey.png");
+		AddTexture("White", "../PixelSandbox/res/textures/white.png");
 
 		//Add Layers to application
 		glLayer = new LearnOpenGLLayer();

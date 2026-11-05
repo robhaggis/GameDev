@@ -22,11 +22,15 @@ namespace Pixel
 		void addTexture(std::string name, std::string filepath);
 		Texture* getTexture(std::string name);
 		void deleteTexture(std::string name);
+
+		inline bool isInitialized() { return m_IsInitialized; }
 		
 	private:
 
 		std::unordered_map<std::string, Shader*>* m_ShaderPool;
 		std::unordered_map<std::string, Texture*>* m_TexturePool;
+
+		bool m_IsInitialized = false;
 	};
 }
 

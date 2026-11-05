@@ -17,13 +17,11 @@ public:
 	void processInput(Pixel::WindowData* inputs) override;
 
 private:
-	Pixel::Shader* m_Shader;
-	Pixel::Texture* m_Texture1;
-	Pixel::Texture* m_Texture2;
-
-	std::vector<f32> vertices;
-	std::vector<ui32> indices;
+	
 	std::vector<glm::vec3> cubePositions;
+	Pixel::Model* m_WoodenCube{};
+	Pixel::Model* m_LightCube{};
+	Pixel::Shader* m_Shader{};
 
 	f32 m_mixValue = 0.01f;
 	

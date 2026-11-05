@@ -10,6 +10,7 @@
 #include "Pixel/AssetManager.h"
 #include "Pixel/Texture.h"
 #include "Pixel/Window/Window.h"
+#include "Pixel/Model.h"
 
 
 #include <glm/glm.hpp>

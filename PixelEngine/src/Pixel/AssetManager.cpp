@@ -133,11 +133,14 @@ namespace Pixel
 
 	void AssetManager::Init()
 	{
-		//Add default shader and default texture, so we've always got something to return
-		addShader("defaultShader", "../PixelEngine/src/Pixel/default.vert", "../PixelEngine/src/Pixel/default.frag");
-		addTexture("defaultTexture", "../PixelEngine/src/Pixel/default.png");
+		if (!m_IsInitialized)
+		{
+			addShader("defaultShader", "../PixelEngine/src/Pixel/default.vert", "../PixelEngine/src/Pixel/default.frag");
+			addTexture("defaultTexture", "../PixelEngine/src/Pixel/default.png");
+			m_IsInitialized = true;
+		}
+		//TODO LOAD RESOURCES AUTOIMATICALLY HERE
 	}
-
 }
 
 

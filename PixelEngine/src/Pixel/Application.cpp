@@ -6,7 +6,7 @@ namespace Pixel
 	Application::Application(i32 width, i32 height, const char* title)
 		:m_Window(nullptr)
 	{
-		m_Window = std::unique_ptr<Window>(Window::create(width, height, title));
+		m_Window.reset(Window::create(width, height, title));
 		m_assetManager.Init();
 	}
 
