@@ -1,9 +1,9 @@
 #include "LearnOpenGLLayer.h"
 
 LearnOpenGLLayer::LearnOpenGLLayer()
-    :Layer("LearnOpenGL"), m_Shader(nullptr), m_Camera(nullptr)
+    :Layer("LearnOpenGL"), m_Shader(nullptr)
 {
-    m_Camera = new Camera(glm::vec3{ 0,0,3.0f }, glm::vec3{ 0,1,0 }, glm::vec3{ 0,0,-1.0f });
+    
 }
 
 LearnOpenGLLayer::~LearnOpenGLLayer()
@@ -14,6 +14,9 @@ LearnOpenGLLayer::~LearnOpenGLLayer()
 
 void LearnOpenGLLayer::OnAttach()
 {
+
+    InitCamera(glm::vec3{ 0,0,3.0f }, glm::vec3{ 0,1,0 }, glm::vec3{ 0,0,-1.0f });
+
     std::vector<f32> vertices = {
     -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
      0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
@@ -81,14 +84,11 @@ void LearnOpenGLLayer::OnUpdate()
 {
     m_WoodenCube->m_Shader->bind();
 
-    //Update View Matrix - TODO move the entire camera to the engine?
     glm::mat4 view = m_Camera->GetViewMatrix();
     m_Shader->setUniform("view", view);
 
-    //Update Projection matrix - TODO only really used for zoom, so should this be moved to the engine?
-    glm::mat4 projection = glm::perspective(glm::radians(m_Camera->getFOV()), static_cast<f32>(Pixel::APP_WIDTH) / static_cast<f32>(Pixel::APP_HEIGHT), 0.1f, 100.0f);
-    m_Shader->setUniform("projection", projection);
-
+    glm::mat4 proj = m_Camera->getProjectionMatrix(Pixel::APP_WIDTH, Pixel::APP_HEIGHT);
+    m_Shader->setUniform("projection", proj);
 
     //Render Wooden Cubes
     for (unsigned int i = 0; i < 10; i++)
@@ -103,7 +103,7 @@ void LearnOpenGLLayer::OnUpdate()
     m_Shader->setUniform("mixValue", m_mixValue);
 
     //Send it!
-    m_Renderer->flush(view, projection); //TODO Should't this be in the engine?
+    m_Renderer->flush(view, proj);  //TODO Should the renderer automatically flush at the end of every update loop?
 }
 
 void LearnOpenGLLayer::OnDetach()

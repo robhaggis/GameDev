@@ -6,7 +6,6 @@
 #include "AssetManager.h"
 #include "Texture.h"
 
-
 namespace Pixel
 {
 	

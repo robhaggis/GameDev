@@ -147,7 +147,6 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\LearnOpenGLLayer.h" />
     <ClInclude Include="src\PixelAppConfig.h" />
   </ItemGroup>

@@ -51,6 +51,7 @@
     <ClInclude Include="src\Pixel\stb_image.h" />
     <ClInclude Include="src\Pixel\Texture.h" />
     <ClInclude Include="src\Pixel\Model.h" />
+    <ClInclude Include="src\Pixel\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pixel\Application.cpp">

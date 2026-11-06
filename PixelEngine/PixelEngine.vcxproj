@@ -168,6 +168,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Pixel\Camera.h" />
     <ClInclude Include="src\Pixel\Model.h" />
     <ClInclude Include="src\Pixel\AssetManager.h" />
     <ClInclude Include="src\Pixel.h" />

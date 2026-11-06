@@ -4,6 +4,7 @@
 #include "Renderer/Renderer.h"
 #include "Pixel/AssetManager.h"
 #include "Pixel/Window/Window.h"	//For access to the input data struct
+#include "Pixel/Camera.h"
 
 namespace Pixel
 {
@@ -26,12 +27,15 @@ namespace Pixel
 		inline void setAssetManager(AssetManager* manager) { m_AssetManager = manager; }
 		inline void setRenderer(Renderer* renderer) { m_Renderer = renderer; }
 
+		void InitCamera(glm::vec3 pos, glm::vec3 up, glm::vec3 right);
+
 	
 	protected:
 		std::string m_DebugName;
 		bool m_IsEnabled;
 		Renderer* m_Renderer;
 		AssetManager* m_AssetManager;
+		Camera* m_Camera;
 	};
 }
 

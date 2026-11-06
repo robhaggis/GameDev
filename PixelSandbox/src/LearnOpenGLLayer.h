@@ -3,8 +3,6 @@
 #include <Pixel.h>
 #include "PixelAppConfig.h"
 
-#include "Camera.h"
-
 class LearnOpenGLLayer : public Pixel::Layer
 {
 public:
@@ -24,8 +22,4 @@ private:
 	Pixel::Shader* m_Shader{};
 
 	f32 m_mixValue = 0.01f;
-	
-	Camera* m_Camera;
-
-	
 };
