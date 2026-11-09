@@ -179,6 +179,7 @@
     <ClInclude Include="src\Pixel\LayerStack.h" />
     <ClInclude Include="src\Pixel\Log.h" />
     <ClInclude Include="src\Pixel\Model.h" />
+    <ClInclude Include="src\Pixel\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Pixel\Renderer\Renderer.h" />
     <ClInclude Include="src\Pixel\Shader.h" />
     <ClInclude Include="src\Pixel\Texture.h" />
@@ -207,6 +208,13 @@
     <ProjectReference Include="thirdparty\glad\GLAD.vcxproj">
       <Project>{5D4A857C-4981-860D-F26D-6C10DE83020F}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Pixel\default.frag" />
+    <None Include="src\Pixel\default.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="src\Pixel\default.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

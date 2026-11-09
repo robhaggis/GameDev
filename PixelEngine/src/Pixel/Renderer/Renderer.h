@@ -4,22 +4,13 @@
 #include "Pixel/Shader.h"
 #include "Pixel/Texture.h"
 #include "Pixel/Model.h"
+#include "RenderCommand.h"
 
 #include "glad.h"
 #include "GLFW/glfw3.h"
 
 namespace Pixel
 {
-
-	struct RenderCommand
-	{
-		ui32 VAO;
-		ui32 shaderID;
-		glm::mat4 transform;
-		i32 modelLoc;
-		std::vector<ui32> textureIDs;
-	};
-
 	class PIXEL_API Renderer
 	{
 	public:
@@ -27,7 +18,7 @@ namespace Pixel
 		Renderer();
 		~Renderer();
 
-		void submit(Model* model, glm::mat4 transform);
+		void submit(RenderCommand rc);
 		void flush(const glm::mat4& view, const glm::mat4& projection);
 
 	private:

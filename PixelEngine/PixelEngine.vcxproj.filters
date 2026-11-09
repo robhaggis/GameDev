@@ -62,6 +62,7 @@
       <Filter>Pixel</Filter>
     </ClInclude>
     <ClInclude Include="src\PixelPCH.h" />
+    <ClInclude Include="src\Pixel\Renderer\RenderCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pixel\Application.cpp">
@@ -98,5 +99,12 @@
       <Filter>Pixel</Filter>
     </ClCompile>
     <ClCompile Include="src\PixelPCH.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Pixel\default.frag" />
+    <None Include="src\Pixel\default.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="src\Pixel\default.png" />
   </ItemGroup>
 </Project>
