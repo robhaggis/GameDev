@@ -5,14 +5,6 @@
     <BuildType Name="Release" />
     <Platform Name="x64" />
   </Configurations>
-  <Project Path="AStarDemo\AStarDemo.vcxproj" Id="A51CEBEA-1187-9F61-5AC5-5007C66E7DB6">
-    <BuildType Solution="Debug|x64" Project="Debug" />
-    <BuildType Solution="Distro|x64" Project="Distro" />
-    <BuildType Solution="Release|x64" Project="Release" />
-    <Platform Solution="Debug|x64" Project="x64" />
-    <Platform Solution="Distro|x64" Project="x64" />
-    <Platform Solution="Release|x64" Project="x64" />
-  </Project>
   <Project Path="PixelEngine\thirdparty\glad\GLAD.vcxproj" Id="5D4A857C-4981-860D-F26D-6C10DE83020F">
     <BuildType Solution="Debug|x64" Project="Debug" />
     <BuildType Solution="Distro|x64" Project="Distro" />

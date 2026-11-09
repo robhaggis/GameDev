@@ -37,8 +37,7 @@ project "GLAD"
 	includedirs
 	{
 		"PixelEngine/thirdparty/glad",
-		"PixelEngine/thirdparty",
-		"PixelEngine/thirdparty/glm"
+		"PixelEngine/thirdparty"
 	}
 
 	filter "system:windows"
@@ -108,8 +107,7 @@ project "PixelEngine"
 		postbuildcommands
 		{
 			
-			("copy /B /Y ..\\bin\\" .. outputdir .. "\\PixelEngine\\PixelEngine.dll ..\\bin\\" .. outputdir .. "\\PixelSandbox\\ > nul"),
-			("copy /B /Y ..\\bin\\" .. outputdir .. "\\PixelEngine\\PixelEngine.dll ..\\bin\\" .. outputdir .. "\\AStarDemo\\ > nul")
+			("copy /B /Y ..\\bin\\" .. outputdir .. "\\PixelEngine\\PixelEngine.dll ..\\bin\\" .. outputdir .. "\\PixelSandbox\\ > nul")
 		}
 	
 	filter "configurations:Debug"
@@ -151,73 +149,7 @@ project "PixelEngine"
 			"PixelEngine/thirdparty/GLFW/bin/Release-windows-x86_64/GLFW"
 		}
 
-project "AStarDemo"
-	location "AStarDemo"
-	kind "ConsoleApp"
-	language "C++"
-	characterset "Unicode"
-	buildoptions{"/utf-8"}
-
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
-	files
-	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
-	}
-
-	includedirs
-	{
-		"PixelEngine/thirdparty/spdlog/include",
-		"PixelEngine/src",
-		"%{IncludeDir.Glad}",
-		"%{IncludeDir.KHR}",
-		"%{IncludeDir.GLFW}"
-	}
-
-	links
-	{
-		"PixelEngine"
-	}
-
-	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "Off"
-		systemversion "latest"
-
-		defines
-		{
-			"PIXEL_PLATFORM_WINDOWS"
-		}
-	
-	filter "configurations:Debug"
-		defines
-		{
-			"PIXEL_DEBUG"
-		}
-		buildoptions "/MDd"
-		symbols "On"
-		optimize "Off"
-
-	filter "configurations:Release"
-		defines
-		{
-			"PIXEL_RELEASE"
-		}
-		symbols "On"
-		optimize "On"
-
-	filter "configurations:Distro"
-		defines
-		{
-			"PIXEL_DISTRO"
-		}
-		symbols "Off"
-		optimize "On"
-
-
-		project "PixelSandbox"
+project "PixelSandbox"
 	location "PixelSandbox"
 	kind "ConsoleApp"
 	language "C++"

@@ -98,8 +98,7 @@
     <ProjectReference>
     </ProjectReference>
     <PostBuildEvent>
-      <Command>copy /B /Y ..\bin\Debug-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Debug-windows-x86_64\PixelSandbox\ &gt; nul
-copy /B /Y ..\bin\Debug-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Debug-windows-x86_64\AStarDemo\ &gt; nul</Command>
+      <Command>copy /B /Y ..\bin\Debug-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Debug-windows-x86_64\PixelSandbox\ &gt; nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -132,8 +131,7 @@ copy /B /Y ..\bin\Debug-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Debug-
     <ProjectReference>
     </ProjectReference>
     <PostBuildEvent>
-      <Command>copy /B /Y ..\bin\Release-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Release-windows-x86_64\PixelSandbox\ &gt; nul
-copy /B /Y ..\bin\Release-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Release-windows-x86_64\AStarDemo\ &gt; nul</Command>
+      <Command>copy /B /Y ..\bin\Release-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Release-windows-x86_64\PixelSandbox\ &gt; nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Distro|x64'">
@@ -166,8 +164,7 @@ copy /B /Y ..\bin\Release-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Rele
     <ProjectReference>
     </ProjectReference>
     <PostBuildEvent>
-      <Command>copy /B /Y ..\bin\Distro-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Distro-windows-x86_64\PixelSandbox\ &gt; nul
-copy /B /Y ..\bin\Distro-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Distro-windows-x86_64\AStarDemo\ &gt; nul</Command>
+      <Command>copy /B /Y ..\bin\Distro-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Distro-windows-x86_64\PixelSandbox\ &gt; nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
