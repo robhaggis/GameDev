@@ -24,25 +24,29 @@ namespace Pixel
 		for (const RenderCommand& cmd : m_RenderQueue)
 		{
 			//Bind to model shader
-			glUseProgram(cmd.shaderID);
-
-
-			//TODO Cache these uniform locations for each shader, so glGetUniformLocation isnt unneccessarily called on each flush
-			const GLint viewLoc = glGetUniformLocation(cmd.shaderID, "view");
-			if (viewLoc >= 0) glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &cmd.view[0][0]);
-			
-			const GLint projectionLoc = glGetUniformLocation(cmd.shaderID, "projection");
-			if (projectionLoc >= 0) glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, &cmd.projection[0][0]);
-			
-			const GLint modelLoc = glGetUniformLocation(cmd.shaderID, "model");
-			if (modelLoc >= 0) glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &cmd.transform[0][0]);
-			
+			glUseProgram(cmd.shader->ID());
 
 			//Set Textures
 			for (i32 i = 0; i < cmd.textureIDs.size(); i++)
 			{
 				glActiveTexture(GL_TEXTURE0 + i);
 				glBindTexture(GL_TEXTURE_2D, cmd.textureIDs.at(i)->ID());
+			}
+
+			//Set Uniforms
+			for (const Uniform& u : cmd.uniforms)
+			{
+				//TODO WTF? Make this more elegant
+				if (const bool* value = std::get_if<bool>(&u.value)) cmd.shader->setUniform(u.name, *value);
+				else if (const i32* value = std::get_if<i32>(&u.value)) cmd.shader->setUniform(u.name, *value);
+				else if (const f32* value = std::get_if<f32>(&u.value)) cmd.shader->setUniform(u.name, *value);
+				else if (const glm::vec2* value = std::get_if<glm::vec2>(&u.value)) cmd.shader->setUniform(u.name, *value);
+				else if (const glm::vec3* value = std::get_if<glm::vec3>(&u.value)) cmd.shader->setUniform(u.name, *value);
+				else if (const glm::vec4* value = std::get_if<glm::vec4>(&u.value)) cmd.shader->setUniform(u.name, *value);
+				else if (const glm::mat2* value = std::get_if<glm::mat2>(&u.value)) cmd.shader->setUniform(u.name, *value);
+				else if (const glm::mat3* value = std::get_if<glm::mat3>(&u.value)) cmd.shader->setUniform(u.name, *value);
+				else if (const glm::mat4* value = std::get_if<glm::mat4>(&u.value)) cmd.shader->setUniform(u.name, *value);
+
 			}
 
 			//Bind to Vertex Array

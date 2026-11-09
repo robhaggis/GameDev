@@ -1,14 +1,5 @@
 #include "LearnOpenGLLayer.h"
 
-
-/*
-
-TODO:
-    - Autoloading textures and shaders in assetmanager
-    - Default Models into asset manager? ie assetManager.get("cube") returns a ref to a cube model
-
-
-*/
 LearnOpenGLLayer::LearnOpenGLLayer()
     :Layer("LearnOpenGL")
 {
@@ -16,56 +7,41 @@ LearnOpenGLLayer::LearnOpenGLLayer()
 
 LearnOpenGLLayer::~LearnOpenGLLayer()
 {
-    delete m_Cube;
+    OnDetach();
 }
 
 void LearnOpenGLLayer::OnAttach()
 {
     InitCamera(glm::vec3{ 0,0,3.0f }, glm::vec3{ 0,1,0 }, glm::vec3{ 0,0,-1.0f });
-    m_Cube = new Pixel::Cube(*m_AssetManager, "cube", "texture", { "WoodContainer" });
-
-    cubePositions = {
-        glm::vec3(0.0f,  0.0f,  0.0f),
-        glm::vec3(2.0f,  5.0f, -15.0f),
-        glm::vec3(-1.5f, -2.2f, -2.5f),
-        glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3(2.4f, -0.4f, -3.5f),
-        glm::vec3(-1.7f,  3.0f, -7.5f),
-        glm::vec3(1.3f, -2.0f, -2.5f),
-        glm::vec3(1.5f,  2.0f, -2.5f),
-        glm::vec3(1.5f,  0.2f, -1.5f),
-        glm::vec3(-1.3f,  1.0f, -1.5f)
-   };
+    Pixel::Model* cube = new Pixel::Cube(*m_AssetManager, "cube", "flatColour", { "WoodContainer" });
+   
+    m_Models.push_back(cube);
 }
 
 void LearnOpenGLLayer::OnUpdate()
 {
     Pixel::RenderCommand rc;
-    for (glm::vec3 v : cubePositions)
+    for (const Pixel::Model* m : m_Models)
     {
-        //Update Transform for multiple wooden cubes
+        //Render the cube at the origin
         glm::mat4 transform = glm::mat4(1.0f);
-        transform = glm::translate(transform, v);
-        transform = glm::rotate(transform, glm::radians(20.0f * v.x), glm::vec3(1.0f, 0.3f, 0.5f));
+        transform = glm::translate(transform, glm::vec3{ 0,0,0 });
 
-        /*
-                Build render command
-        */
-
+        //Build the render command
         //Vertex Data
-        rc.VAO = m_Cube->m_VAO;
-        rc.indicesCount = m_Cube->m_IndicesCount;
-
+        rc.VAO = m->m_VAO;
+        rc.indicesCount = m->m_IndicesCount;
         //Shader
-        rc.shaderID = m_Cube->m_Shader->ID();
-
-        //MVP Matrices
-        rc.transform = transform;
-        rc.projection = m_Camera->getProjectionMatrix(Pixel::APP_WIDTH, Pixel::APP_HEIGHT);
-        rc.view = m_Camera->GetViewMatrix();
-
+        rc.shader = m->m_Shader;
+        //Uniforms
+        rc.uniforms.push_back({ "model" ,transform });
+        rc.uniforms.push_back({ "projection", m_Camera->getProjectionMatrix(Pixel::APP_WIDTH, Pixel::APP_HEIGHT) });
+        rc.uniforms.push_back({ "view", m_Camera->GetViewMatrix() });
+        rc.uniforms.push_back({ "rVal", 0.35f });
+        rc.uniforms.push_back({ "gVal", 0.16f });
+        rc.uniforms.push_back({ "bVal", 0.84f });
         //Textures
-        rc.textureIDs = m_Cube->m_Textures;
+        rc.textureIDs = m->m_Textures;
 
         m_Renderer->submit(rc);
     }
@@ -76,7 +52,11 @@ void LearnOpenGLLayer::OnUpdate()
 
 void LearnOpenGLLayer::OnDetach()
 {
-    delete m_Cube;
+    for (Pixel::Model* m : m_Models)
+    {
+        delete m;
+    }
+    m_Models.clear();
 }
 
 void LearnOpenGLLayer::processInput(Pixel::WindowData* inputs)
@@ -84,9 +64,17 @@ void LearnOpenGLLayer::processInput(Pixel::WindowData* inputs)
     //keyPresses
     if (inputs->isKeyPressed[GLFW_KEY_UP])
     {
+        for (Pixel::Model* m : m_Models)
+        {
+            m->setShader(m_AssetManager->getShader("flatTexture"));
+        }
     }
     else if (inputs->isKeyPressed[GLFW_KEY_DOWN])
     {
+        for (Pixel::Model* m : m_Models)
+        {
+            m->setShader(m_AssetManager->getShader("flatColour"));
+        }
     }
 
     //Mouse Click

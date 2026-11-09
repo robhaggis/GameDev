@@ -165,10 +165,10 @@
     <Image Include="res\textures\white.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\shaders\flatLight.frag" />
-    <None Include="res\shaders\flatLight.vert" />
-    <None Include="res\shaders\texture.frag" />
-    <None Include="res\shaders\texture.vert" />
+    <None Include="res\shaders\flatColour.frag" />
+    <None Include="res\shaders\flatColour.vert" />
+    <None Include="res\shaders\flatTexture.frag" />
+    <None Include="res\shaders\flatTexture.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

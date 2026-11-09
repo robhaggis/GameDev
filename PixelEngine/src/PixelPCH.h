@@ -15,6 +15,7 @@
 #include <cstdint>
 #include <filesystem>
 #include <sys/stat.h>
+#include <variant>
 
 //Data Structures
 #include <string>

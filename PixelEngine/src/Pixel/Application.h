@@ -36,6 +36,7 @@ namespace Pixel
 	private:
 		void AddShader(std::string name, std::string vertPath, std::string fragPath);
 		void AddTexture(std::string name, std::string filepath);
+		
 		std::unique_ptr<Window> m_Window;
 		WindowData m_InputData;
 		bool m_isRunning = true;

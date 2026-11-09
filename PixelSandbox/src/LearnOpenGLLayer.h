@@ -19,6 +19,6 @@ public:
 
 private:
 	
-	std::vector<glm::vec3> cubePositions;
-	Pixel::Cube* m_Cube;
+	std::vector<Pixel::Model*> m_Models;
+	//Pixel::Cube* m_Cube;
 };

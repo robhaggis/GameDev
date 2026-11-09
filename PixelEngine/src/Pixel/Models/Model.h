@@ -16,10 +16,13 @@ namespace Pixel
 	public:
 		
 		Model(AssetManager& assets, std::string name, const std::vector<f32>& vertices, const std::vector<ui32>& indices, std::string shaderName, std::vector<std::string> textureNames = {});
-		~Model();
+		virtual ~Model();
 
 		inline void setShader(Shader* s) { m_Shader = s; }
 		void addTexture(Texture* ts);
+
+		template<typename T>
+		void setUniform(std::string name, T value);
 		
 	public:
 		std::string m_Name;

@@ -50,6 +50,20 @@ namespace Pixel
             }
 
         }
+
+        //Extracts the filename from the path provided, optionally with the file extension also included
+        static std::string extractFileNameFromPath(std::string filepath, bool alsoReturnFileExtension = false)
+        {
+            //Extract just the filename from the path
+            size_t lastSlash = filepath.find_last_of("/\\");
+            std::string base = (lastSlash == std::string::npos) ? filepath : filepath.substr(lastSlash + 1);
+
+            if (alsoReturnFileExtension) return base;
+
+            size_t lastDot = base.find_last_of('.');
+            std::string result = (lastDot == std::string::npos || lastDot == 0) ? base : base.substr(0, lastDot);
+            return result;
+        }
 	};
 } 
 	

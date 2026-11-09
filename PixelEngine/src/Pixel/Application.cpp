@@ -89,13 +89,8 @@ namespace Pixel
 
 		for (std::string s : allTextures)
 		{
-			//Extract just the filename from the path
-			size_t lastSlash = s.find_last_of("/\\");
-			std::string base = (lastSlash == std::string::npos) ? s : s.substr(lastSlash + 1);
-			size_t lastDot = base.find_last_of('.');
-			std::string texName = (lastDot == std::string::npos || lastDot == 0) ? base : base.substr(0, lastDot);
-
-			AddTexture(texName, s);
+			std::string textureName = FileIO::extractFileNameFromPath(s);
+			AddTexture(textureName, s);
 		}
 	}
 
@@ -118,11 +113,7 @@ namespace Pixel
 		i32 idx = 0;
 		for (std::string s : allVerts)
 		{
-			//Extract just the filename from the path
-			size_t lastSlash = s.find_last_of("/\\");
-			std::string base = (lastSlash == std::string::npos) ? s : s.substr(lastSlash + 1);
-			size_t lastDot = base.find_last_of('.');
-			std::string shaderName = (lastDot == std::string::npos || lastDot == 0) ? base : base.substr(0, lastDot);
+			std::string shaderName = FileIO::extractFileNameFromPath(s);
 
 			AddShader(shaderName, s, allFrags.at(idx));
 			idx++;
