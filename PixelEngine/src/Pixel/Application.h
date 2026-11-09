@@ -26,9 +26,10 @@ namespace Pixel
 		WindowData* getInput() { return &m_InputData; }
 
 		void InitResources(std::string pathToTextures, std::string pathToShaders);
-		Shader* GetShader(std::string name);
-
+		void AddTextures(std::string pathToTextures);
+		void AddShaders(std::string pathToShaders);
 		
+		Shader* GetShader(std::string name);
 		Texture* GetTexture(std::string name);
 
 

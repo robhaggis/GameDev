@@ -15,9 +15,6 @@ namespace Pixel
 	{
 		m_LayerStack.RemoveAllLayers();
 		delete m_Renderer;
-		//delete m_assetManager;  TODO uncomment these
-		//delete m_Window;
-
 	}
 
 	void Application::run()
@@ -81,9 +78,12 @@ namespace Pixel
 
 	void Application::InitResources(std::string pathToTextures, std::string pathToShaders)
 	{
-		/*
-			Load Textures
-		*/
+		AddTextures(pathToTextures);
+		AddShaders(pathToShaders);
+	}
+
+	void Application::AddTextures(std::string pathToTextures)
+	{
 		std::vector<std::string> allTextures{};
 		FileIO::getAllFilesInDirectory(&allTextures, pathToTextures);
 
@@ -97,23 +97,22 @@ namespace Pixel
 
 			AddTexture(texName, s);
 		}
+	}
 
-
-		/*
-			Load Shaders
-		*/
+	void Application::AddShaders(std::string pathToShaders)
+	{
 		std::vector<std::string> allShaders{};
 		FileIO::getAllFilesInDirectory(&allShaders, pathToShaders);
 
 		//Separate shaders into frags and verts
-		//TODO is this guaranteed to be robust, as it assumes files are added in pairs. Might be better to just combine .vert and .frag into one file, and split programatically?
+		//TODO is this guaranteed to be robust, as it assumes getAllFilesInDirectory adds files in pairs and in the same order (.frag then .vert). Might be better to just combine .vert and .frag into one file, and split programatically?
 		std::vector<std::string> allVerts{};
 		std::vector<std::string> allFrags{};
 
-		for (i32 i = 0; i < allShaders.size(); i+=2)
+		for (i32 i = 0; i < allShaders.size(); i += 2)
 		{
 			allFrags.push_back(allShaders.at(i));
-			allVerts.push_back(allShaders.at(i+1));
+			allVerts.push_back(allShaders.at(i + 1));
 		}
 
 		i32 idx = 0;
