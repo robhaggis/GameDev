@@ -98,7 +98,8 @@
     <ProjectReference>
     </ProjectReference>
     <PostBuildEvent>
-      <Command>copy /B /Y ..\bin\Debug-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Debug-windows-x86_64\PixelSandbox\ &gt; nul</Command>
+      <Command>copy /B /Y ..\bin\Debug-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Debug-windows-x86_64\PixelSandbox\ &gt; nul
+copy /B /Y ..\bin\Debug-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Debug-windows-x86_64\AStarDemo\ &gt; nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,7 +132,8 @@
     <ProjectReference>
     </ProjectReference>
     <PostBuildEvent>
-      <Command>copy /B /Y ..\bin\Release-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Release-windows-x86_64\PixelSandbox\ &gt; nul</Command>
+      <Command>copy /B /Y ..\bin\Release-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Release-windows-x86_64\PixelSandbox\ &gt; nul
+copy /B /Y ..\bin\Release-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Release-windows-x86_64\AStarDemo\ &gt; nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Distro|x64'">
@@ -164,56 +166,50 @@
     <ProjectReference>
     </ProjectReference>
     <PostBuildEvent>
-      <Command>copy /B /Y ..\bin\Distro-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Distro-windows-x86_64\PixelSandbox\ &gt; nul</Command>
+      <Command>copy /B /Y ..\bin\Distro-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Distro-windows-x86_64\PixelSandbox\ &gt; nul
+copy /B /Y ..\bin\Distro-windows-x86_64\PixelEngine\PixelEngine.dll ..\bin\Distro-windows-x86_64\AStarDemo\ &gt; nul</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Pixel\Camera.h" />
-    <ClInclude Include="src\Pixel\Model.h" />
-    <ClInclude Include="src\Pixel\AssetManager.h" />
     <ClInclude Include="src\Pixel.h" />
     <ClInclude Include="src\Pixel\Application.h" />
+    <ClInclude Include="src\Pixel\AssetManager.h" />
+    <ClInclude Include="src\Pixel\Camera.h" />
     <ClInclude Include="src\Pixel\Core.h" />
     <ClInclude Include="src\Pixel\EntryPoint.h" />
     <ClInclude Include="src\Pixel\FileIO.h" />
     <ClInclude Include="src\Pixel\Layer.h" />
     <ClInclude Include="src\Pixel\LayerStack.h" />
     <ClInclude Include="src\Pixel\Log.h" />
+    <ClInclude Include="src\Pixel\Model.h" />
     <ClInclude Include="src\Pixel\Renderer\Renderer.h" />
     <ClInclude Include="src\Pixel\Shader.h" />
-    <ClInclude Include="src\Pixel\stb_image.h" />
+    <ClInclude Include="src\Pixel\Texture.h" />
     <ClInclude Include="src\Pixel\Window\Window.h" />
     <ClInclude Include="src\Pixel\Window\WindowsWindow.h" />
+    <ClInclude Include="src\Pixel\stb_image.h" />
     <ClInclude Include="src\PixelPCH.h" />
-    <ClInclude Include="src\Pixel\Texture.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Pixel\Model.cpp" />
-    <ClCompile Include="src\Pixel\AssetManager.cpp" />
     <ClCompile Include="src\Pixel\Application.cpp" />
+    <ClCompile Include="src\Pixel\AssetManager.cpp" />
     <ClCompile Include="src\Pixel\Layer.cpp" />
     <ClCompile Include="src\Pixel\LayerStack.cpp" />
     <ClCompile Include="src\Pixel\Log.cpp" />
+    <ClCompile Include="src\Pixel\Model.cpp" />
     <ClCompile Include="src\Pixel\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Pixel\Shader.cpp" />
-    <ClCompile Include="src\Pixel\stb_image.cpp" />
+    <ClCompile Include="src\Pixel\Texture.cpp" />
     <ClCompile Include="src\Pixel\Window\WindowsWindow.cpp" />
+    <ClCompile Include="src\Pixel\stb_image.cpp" />
     <ClCompile Include="src\PixelPCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Pixel\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="thirdparty\glad\GLAD.vcxproj">
       <Project>{5D4A857C-4981-860D-F26D-6C10DE83020F}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\Pixel\default.frag" />
-    <None Include="src\Pixel\default.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="src\Pixel\default.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

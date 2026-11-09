@@ -14,12 +14,13 @@ Pixel::Layer::~Layer()
 	delete m_Camera;
 }
 
-void Pixel::Layer::InitCamera(glm::vec3 pos, glm::vec3 up, glm::vec3 right)
+void Pixel::Layer::InitCamera(glm::vec3 pos, glm::vec3 up, glm::vec3 front)
 {
 	if (m_Camera == nullptr)
 	{
-		m_Camera = new Camera(glm::vec3{ 0,0,3.0f }, glm::vec3{ 0,1,0 }, glm::vec3{ 0,0,-1.0f });
+		m_Camera = new Camera(pos, up, front);
 	}
+
 	else
 	{
 		PIX_CORE_WARN("Camera already initialised on Layer {0}", m_DebugName);

@@ -111,6 +111,23 @@ class PIXEL_API Camera
 			return m_CamFOV;
 		}
 
+		void LookAt(const glm::vec3& target)
+		{
+			const glm::vec3 direction = target - m_CamPos;
+			const f32 lengthSquared = glm::dot(direction, direction);
+
+			if (lengthSquared <= 1e-12f)
+				return;
+
+			const glm::vec3 normalizedDirection = glm::normalize(direction);
+
+			m_CamYaw = glm::degrees(std::atan2(normalizedDirection.z, normalizedDirection.x));
+			m_CamPitch = glm::degrees(std::asin(glm::clamp(normalizedDirection.y, -1.0f, 1.0f)));
+			m_CamPitch = glm::clamp(m_CamPitch, -89.0f, 89.0f);
+
+			updateCameraVectors();
+		}
+
 	private:
 		glm::vec3 m_CamPos;
 		glm::vec3 m_CamFront;

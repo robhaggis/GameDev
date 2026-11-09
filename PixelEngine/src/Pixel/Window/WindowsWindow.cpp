@@ -229,13 +229,15 @@ namespace Pixel
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+			glfwWindowHint(GLFW_SAMPLES, 8);
+			
+
 			
 			m_GLFWWindow = glfwCreateWindow((i32)m_winData.m_Width, (i32)m_winData.m_Height, m_winData.m_Title, NULL, NULL);
 			glfwSetWindowPos(m_GLFWWindow, 500, 400);
 			PIX_CORE_INFO("Window Created successfully");
 			glfwMakeContextCurrent(m_GLFWWindow);
 			glfwSetWindowUserPointer(m_GLFWWindow, &m_winData);
-
 			//Init GLAD
 			if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 			{

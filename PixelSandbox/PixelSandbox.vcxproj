@@ -159,20 +159,6 @@
       <Project>{7D4C8C33-E901-0529-72F6-FEFFDEAAFB2C}</Project>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="res\shaders\basic.frag" />
-    <None Include="res\shaders\basic.vert" />
-    <None Include="res\shaders\flatLight.frag" />
-    <None Include="res\shaders\flatLight.vert" />
-    <None Include="res\shaders\texture.frag" />
-    <None Include="res\shaders\texture.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="res\textures\container.png" />
-    <Image Include="res\textures\default.png" />
-    <Image Include="res\textures\harvey.png" />
-    <Image Include="res\textures\white.png" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
