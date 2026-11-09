@@ -24,7 +24,6 @@ public:
 
 
 		AddTexture("WoodContainer", "../PixelSandbox/res/textures/container.png");
-		AddTexture("Harvey", "../PixelSandbox/res/textures/harvey.png");
 		AddTexture("White", "../PixelSandbox/res/textures/white.png");
 
 		//Add Layers to application

@@ -2,7 +2,7 @@
 #include "PixelPCH.h"
 #include "Model.h"
 
-#include "AssetManager.h"
+#include "Pixel/AssetManager.h"
 
 namespace Pixel
 
@@ -10,12 +10,13 @@ namespace Pixel
 	Model::Model(AssetManager& assets, std::string name, const std::vector<f32>& vertices, const std::vector<ui32>& indices, std::string shaderName, std::vector<std::string> textureNames)
 		:m_Name(name), 
 		m_AssetManager(assets),
-		m_Shader(assets.getShader(shaderName))
+		m_Shader(nullptr)
 	{
+		if (!m_AssetManager.isInitialized()) m_AssetManager.Init();		//Sanity Check
 
-		if (!assets.isInitialized()) assets.Init();		//Sanity Check
 
-		//If textures provided to the constructor, then set them to default texture (#FF00FF)
+		m_Shader = m_AssetManager.getShader(shaderName);
+		//If no textures provided to the constructor, then set them to default texture (#FF00FF)
 		if (textureNames.empty())
 		{
 			m_Textures.emplace_back(assets.getTexture("defaultTexture"));

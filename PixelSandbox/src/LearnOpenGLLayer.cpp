@@ -5,76 +5,24 @@
 
 TODO:
     - Autoloading textures and shaders in assetmanager
-    - Default Models into asset manager?
+    - Default Models into asset manager? ie assetManager.get("cube") returns a ref to a cube model
 
 
 */
 LearnOpenGLLayer::LearnOpenGLLayer()
-    :Layer("LearnOpenGL"), m_Shader(nullptr)
+    :Layer("LearnOpenGL")
 {
-    
 }
 
 LearnOpenGLLayer::~LearnOpenGLLayer()
 {
-    delete m_Shader;
-    delete m_Camera;
+    delete m_Cube;
 }
 
 void LearnOpenGLLayer::OnAttach()
 {
-
     InitCamera(glm::vec3{ 0,0,3.0f }, glm::vec3{ 0,1,0 }, glm::vec3{ 0,0,-1.0f });
-
-    std::vector<f32> vertices = {
-        // Back face (-Z)
-        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // 0
-         0.5f, -0.5f, -0.5f,  1.0f, 0.0f, // 1
-         0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // 2
-        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // 3
-
-        // Front face (+Z)
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // 4
-         0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // 5
-         0.5f,  0.5f,  0.5f,  1.0f, 1.0f, // 6
-        -0.5f,  0.5f,  0.5f,  0.0f, 1.0f, // 7
-
-        // Left face (-X)
-        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // 8
-        -0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // 9
-        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // 10
-        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // 11
-
-        // Right face (+X)
-         0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // 12
-         0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // 13
-         0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // 14
-         0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // 15
-
-         // Bottom face (-Y)
-         -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // 16
-          0.5f, -0.5f, -0.5f,  1.0f, 1.0f, // 17
-          0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // 18
-         -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // 19
-
-         // Top face (+Y)
-         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // 20
-          0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // 21
-          0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // 22
-         -0.5f,  0.5f,  0.5f,  0.0f, 0.0f  // 23
-    };
-
-      std::vector<ui32> indices = {
-        0,  1,  2,   2,  3,  0,  // Back face
-        4,  5,  6,   6,  7,  4,  // Front face
-        8,  9,  10,  10, 11, 8,  // Left face
-        12, 13, 14,  14, 15, 12, // Right face
-        16, 17, 18,  18, 19, 16, // Bottom face
-        20, 21, 22,  22, 23, 20  // Top face
-    };
-
-    m_Shader = m_AssetManager->getShader("Texture");
-    m_WoodenCube = new Pixel::Model(*m_AssetManager, "cube", vertices, indices, "Texture", { "WoodContainer", "Harvey" });
+    m_Cube = new Pixel::Cube(*m_AssetManager, "cube", "Texture", { "WoodContainer" });
 
     cubePositions = {
         glm::vec3(0.0f,  0.0f,  0.0f),
@@ -92,8 +40,6 @@ void LearnOpenGLLayer::OnAttach()
 
 void LearnOpenGLLayer::OnUpdate()
 {
-    //m_WoodenCube->m_Shader->bind();
-
     Pixel::RenderCommand rc;
     for (unsigned int i = 0; i < 10; i++)
     {
@@ -107,11 +53,11 @@ void LearnOpenGLLayer::OnUpdate()
         */
 
         //Vertex Data
-        rc.VAO = m_WoodenCube->m_VAO;
-        rc.indicesCount = m_WoodenCube->m_IndicesCount;
+        rc.VAO = m_Cube->m_VAO;
+        rc.indicesCount = m_Cube->m_IndicesCount;
 
         //Shader
-        rc.shaderID = m_WoodenCube->m_Shader->ID();
+        rc.shaderID = m_Cube->m_Shader->ID();
 
         //MVP Matrices
         rc.transform = transform;
@@ -119,22 +65,18 @@ void LearnOpenGLLayer::OnUpdate()
         rc.view = m_Camera->GetViewMatrix();
 
         //Textures
-        rc.textureIDs = m_WoodenCube->m_Textures;
+        rc.textureIDs = m_Cube->m_Textures;
 
         m_Renderer->submit(rc);
     }
 
-    m_Shader->bind();
-    m_Shader->setUniform("mixValue", m_mixValue);
-
     //Send it!
-    m_Renderer->flush();  //TODO Should the renderer automatically flush at the end of every update loop?
+    m_Renderer->flush();
 }
 
 void LearnOpenGLLayer::OnDetach()
 {
-    delete m_WoodenCube;
-    delete m_LightCube;
+    delete m_Cube;
 }
 
 void LearnOpenGLLayer::processInput(Pixel::WindowData* inputs)
@@ -142,13 +84,9 @@ void LearnOpenGLLayer::processInput(Pixel::WindowData* inputs)
     //keyPresses
     if (inputs->isKeyPressed[GLFW_KEY_UP])
     {
-        m_mixValue += 0.01f;
-        if (m_mixValue > 1.0f) m_mixValue = 1.0f;
     }
     else if (inputs->isKeyPressed[GLFW_KEY_DOWN])
     {
-        m_mixValue -= 0.01f;
-        if (m_mixValue < 0.0f) m_mixValue = 0.0f;
     }
 
     //Mouse Click

@@ -3,7 +3,7 @@
 #include "Pixel/Log.h"
 #include "Pixel/Shader.h"
 #include "Pixel/Texture.h"
-#include "Pixel/Model.h"
+#include "Pixel/Models/Model.h"
 #include "RenderCommand.h"
 
 #include "glad.h"

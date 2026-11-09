@@ -3,7 +3,7 @@
 #include "Pixel/Shader.h"
 #include "Pixel/Texture.h"
 
-#include "Core.h"
+#include "Pixel/Core.h"
 #include "glad.h"
 #include "GLFW/glfw3.h"
 

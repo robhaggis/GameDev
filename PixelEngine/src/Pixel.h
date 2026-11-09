@@ -10,7 +10,8 @@
 #include "Pixel/AssetManager.h"
 #include "Pixel/Texture.h"
 #include "Pixel/Window/Window.h"
-#include "Pixel/Model.h"
+#include "Pixel/Models/Model.h"
+#include "Pixel/Models/Cube.h"
 #include "Pixel/Camera.h"
 #include "Pixel/Renderer/RenderCommand.h"
 

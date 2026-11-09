@@ -4,6 +4,8 @@
 #include "PixelAppConfig.h"
 
 
+
+
 class LearnOpenGLLayer : public Pixel::Layer
 {
 public:
@@ -18,9 +20,5 @@ public:
 private:
 	
 	std::vector<glm::vec3> cubePositions;
-	Pixel::Model* m_WoodenCube{};
-	Pixel::Model* m_LightCube{};
-	Pixel::Shader* m_Shader{};
-
-	f32 m_mixValue = 0.01f;
+	Pixel::Cube* m_Cube;
 };

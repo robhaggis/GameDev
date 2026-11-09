@@ -178,7 +178,8 @@
     <ClInclude Include="src\Pixel\Layer.h" />
     <ClInclude Include="src\Pixel\LayerStack.h" />
     <ClInclude Include="src\Pixel\Log.h" />
-    <ClInclude Include="src\Pixel\Model.h" />
+    <ClInclude Include="src\Pixel\Models\Cube.h" />
+    <ClInclude Include="src\Pixel\Models\Model.h" />
     <ClInclude Include="src\Pixel\Renderer\RenderCommand.h" />
     <ClInclude Include="src\Pixel\Renderer\Renderer.h" />
     <ClInclude Include="src\Pixel\Shader.h" />
@@ -194,7 +195,7 @@
     <ClCompile Include="src\Pixel\Layer.cpp" />
     <ClCompile Include="src\Pixel\LayerStack.cpp" />
     <ClCompile Include="src\Pixel\Log.cpp" />
-    <ClCompile Include="src\Pixel\Model.cpp" />
+    <ClCompile Include="src\Pixel\Models\Model.cpp" />
     <ClCompile Include="src\Pixel\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Pixel\Shader.cpp" />
     <ClCompile Include="src\Pixel\Texture.cpp" />
