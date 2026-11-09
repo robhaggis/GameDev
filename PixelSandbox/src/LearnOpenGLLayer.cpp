@@ -4,8 +4,6 @@
 /*
 
 TODO:
-    - Switch Back to Indexed Rendering
-    - Abstraction of RenderCommand?
     - Autoloading textures and shaders in assetmanager
     - Default Models into asset manager?
 
@@ -94,37 +92,43 @@ void LearnOpenGLLayer::OnAttach()
 
 void LearnOpenGLLayer::OnUpdate()
 {
-    m_WoodenCube->m_Shader->bind();
-
-    glm::mat4 view = m_Camera->GetViewMatrix();
-    m_Shader->setUniform("view", view);
-
-    glm::mat4 proj = m_Camera->getProjectionMatrix(Pixel::APP_WIDTH, Pixel::APP_HEIGHT);
-    m_Shader->setUniform("projection", proj);
-
-    //Render Wooden Cubes
+    //m_WoodenCube->m_Shader->bind();
 
     Pixel::RenderCommand rc;
     for (unsigned int i = 0; i < 10; i++)
     {
-        //Update Model Matrix for multiple wooden cubes
+        //Update Transform for multiple wooden cubes
         glm::mat4 transform = glm::mat4(1.0f);
         transform = glm::translate(transform, cubePositions[i]);
         transform = glm::rotate(transform, glm::radians(20.0f * i), glm::vec3(1.0f, 0.3f, 0.5f));
 
-        //Build render command
+        /*
+                Build render command
+        */
+
+        //Vertex Data
         rc.VAO = m_WoodenCube->m_VAO;
+        rc.indicesCount = m_WoodenCube->m_IndicesCount;
+
+        //Shader
         rc.shaderID = m_WoodenCube->m_Shader->ID();
+
+        //MVP Matrices
         rc.transform = transform;
+        rc.projection = m_Camera->getProjectionMatrix(Pixel::APP_WIDTH, Pixel::APP_HEIGHT);
+        rc.view = m_Camera->GetViewMatrix();
+
+        //Textures
         rc.textureIDs = m_WoodenCube->m_Textures;
 
         m_Renderer->submit(rc);
     }
 
+    m_Shader->bind();
     m_Shader->setUniform("mixValue", m_mixValue);
 
     //Send it!
-    m_Renderer->flush(view, proj);  //TODO Should the renderer automatically flush at the end of every update loop?
+    m_Renderer->flush();  //TODO Should the renderer automatically flush at the end of every update loop?
 }
 
 void LearnOpenGLLayer::OnDetach()

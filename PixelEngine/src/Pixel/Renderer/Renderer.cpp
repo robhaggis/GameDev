@@ -14,23 +14,25 @@ namespace Pixel
 		
 	}
 
-	void Renderer::submit(RenderCommand rc)
+	void Renderer::submit(const RenderCommand& rc)
 	{
 		m_RenderQueue.emplace_back(rc);
 	}
 
-	void Renderer::flush(const glm::mat4& view, const glm::mat4& projection)
+	void Renderer::flush()
 	{
 		for (const RenderCommand& cmd : m_RenderQueue)
 		{
 			//Bind to model shader
 			glUseProgram(cmd.shaderID);
 
+
+			//TODO Cache these uniform locations for each shader, so glGetUniformLocation isnt unneccessarily called on each flush
 			const GLint viewLoc = glGetUniformLocation(cmd.shaderID, "view");
-			if (viewLoc >= 0) glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
+			if (viewLoc >= 0) glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &cmd.view[0][0]);
 			
 			const GLint projectionLoc = glGetUniformLocation(cmd.shaderID, "projection");
-			if (projectionLoc >= 0) glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, &projection[0][0]);
+			if (projectionLoc >= 0) glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, &cmd.projection[0][0]);
 			
 			const GLint modelLoc = glGetUniformLocation(cmd.shaderID, "model");
 			if (modelLoc >= 0) glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &cmd.transform[0][0]);
@@ -46,7 +48,7 @@ namespace Pixel
 			//Bind to Vertex Array
 			glBindVertexArray(cmd.VAO);
 
-			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLES, cmd.indicesCount, GL_UNSIGNED_INT, 0);
 		}
 
 		m_RenderQueue.clear();

@@ -18,8 +18,8 @@ namespace Pixel
 		Renderer();
 		~Renderer();
 
-		void submit(RenderCommand rc);
-		void flush(const glm::mat4& view, const glm::mat4& projection);
+		void submit(const RenderCommand& rc);
+		void flush();
 
 	private:
 		std::vector<RenderCommand> m_RenderQueue;
