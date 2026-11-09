@@ -22,7 +22,7 @@ LearnOpenGLLayer::~LearnOpenGLLayer()
 void LearnOpenGLLayer::OnAttach()
 {
     InitCamera(glm::vec3{ 0,0,3.0f }, glm::vec3{ 0,1,0 }, glm::vec3{ 0,0,-1.0f });
-    m_Cube = new Pixel::Cube(*m_AssetManager, "cube", "Texture", { "WoodContainer" });
+    m_Cube = new Pixel::Cube(*m_AssetManager, "cube", "texture", { "WoodContainer" });
 
     cubePositions = {
         glm::vec3(0.0f,  0.0f,  0.0f),
@@ -41,12 +41,12 @@ void LearnOpenGLLayer::OnAttach()
 void LearnOpenGLLayer::OnUpdate()
 {
     Pixel::RenderCommand rc;
-    for (unsigned int i = 0; i < 10; i++)
+    for (glm::vec3 v : cubePositions)
     {
         //Update Transform for multiple wooden cubes
         glm::mat4 transform = glm::mat4(1.0f);
-        transform = glm::translate(transform, cubePositions[i]);
-        transform = glm::rotate(transform, glm::radians(20.0f * i), glm::vec3(1.0f, 0.3f, 0.5f));
+        transform = glm::translate(transform, v);
+        transform = glm::rotate(transform, glm::radians(20.0f * v.x), glm::vec3(1.0f, 0.3f, 0.5f));
 
         /*
                 Build render command

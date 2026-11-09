@@ -25,14 +25,16 @@ namespace Pixel
 
 		WindowData* getInput() { return &m_InputData; }
 
-		void AddShader(std::string name, std::string vertPath, std::string fragPath);
+		void InitResources(std::string pathToTextures, std::string pathToShaders);
 		Shader* GetShader(std::string name);
 
-		void AddTexture(std::string name, std::string filepath);
+		
 		Texture* GetTexture(std::string name);
 
 
 	private:
+		void AddShader(std::string name, std::string vertPath, std::string fragPath);
+		void AddTexture(std::string name, std::string filepath);
 		std::unique_ptr<Window> m_Window;
 		WindowData m_InputData;
 		bool m_isRunning = true;

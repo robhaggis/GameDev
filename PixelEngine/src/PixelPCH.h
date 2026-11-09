@@ -13,6 +13,8 @@
 #include <cstring>
 #include <cmath>
 #include <cstdint>
+#include <filesystem>
+#include <sys/stat.h>
 
 //Data Structures
 #include <string>

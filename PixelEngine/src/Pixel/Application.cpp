@@ -79,6 +79,57 @@ namespace Pixel
 		m_assetManager.addShader(name, vertPath, fragPath);
 	}
 
+	void Application::InitResources(std::string pathToTextures, std::string pathToShaders)
+	{
+		/*
+			Load Textures
+		*/
+		std::vector<std::string> allTextures{};
+		FileIO::getAllFilesInDirectory(&allTextures, pathToTextures);
+
+		for (std::string s : allTextures)
+		{
+			//Extract just the filename from the path
+			size_t lastSlash = s.find_last_of("/\\");
+			std::string base = (lastSlash == std::string::npos) ? s : s.substr(lastSlash + 1);
+			size_t lastDot = base.find_last_of('.');
+			std::string texName = (lastDot == std::string::npos || lastDot == 0) ? base : base.substr(0, lastDot);
+
+			AddTexture(texName, s);
+		}
+
+
+		/*
+			Load Shaders
+		*/
+		std::vector<std::string> allShaders{};
+		FileIO::getAllFilesInDirectory(&allShaders, pathToShaders);
+
+		//Separate shaders into frags and verts
+		//TODO is this guaranteed to be robust, as it assumes files are added in pairs. Might be better to just combine .vert and .frag into one file, and split programatically?
+		std::vector<std::string> allVerts{};
+		std::vector<std::string> allFrags{};
+
+		for (i32 i = 0; i < allShaders.size(); i+=2)
+		{
+			allFrags.push_back(allShaders.at(i));
+			allVerts.push_back(allShaders.at(i+1));
+		}
+
+		i32 idx = 0;
+		for (std::string s : allVerts)
+		{
+			//Extract just the filename from the path
+			size_t lastSlash = s.find_last_of("/\\");
+			std::string base = (lastSlash == std::string::npos) ? s : s.substr(lastSlash + 1);
+			size_t lastDot = base.find_last_of('.');
+			std::string shaderName = (lastDot == std::string::npos || lastDot == 0) ? base : base.substr(0, lastDot);
+
+			AddShader(shaderName, s, allFrags.at(idx));
+			idx++;
+		}
+	}
+
 	Shader* Application::GetShader(std::string name)
 	{
 		return m_assetManager.getShader(name);
